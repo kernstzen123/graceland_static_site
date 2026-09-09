@@ -1,0 +1,33 @@
+.hours-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 2px solid var(--color-line-on-ink);
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--color-ink);
+}
+.hours-row:last-child {
+  border-bottom: none;
+}
+
+.hours-day {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.hours-time {
+  text-align: right;
+}
+
+.hours-closed-note {
+  margin-top: 16px;
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 700;
+  color: var(--color-tangerine-shadow);
+}

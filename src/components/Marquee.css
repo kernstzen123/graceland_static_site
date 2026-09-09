@@ -1,0 +1,37 @@
+.marquee {
+  background: var(--color-teal);
+  border-top: 3px solid var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding-right: 34px; /* Matches gap to ensure 50% transform is a perfect loop */
+  width: max-content;
+  white-space: nowrap;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.4vw, 30px);
+  color: var(--color-pine);
+}
+
+.marquee-dot {
+  color: var(--color-yellow);
+  font-size: clamp(19px, 2.4vw, 30px);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

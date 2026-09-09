@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Graceland Venues — design tokens
+   Direction 1a "Sun-bleached Poolside" (see design/Graceland Screens.dc.html)
+   ========================================================================== */
+:root {
+  /* Palette */
+  --color-cream: #fbf3e2; /* page background */
+  --color-pine: #123b3f; /* dark teal — headers, dark sections, primary text-on-light */
+  --color-pine-press: #0c2a2d;
+  --color-ink: #2a1206; /* near-black brown — headline colour, deep text */
+  --color-tangerine: #e9601f; /* primary CTA */
+  --color-tangerine-press: #d8541a;
+  --color-tangerine-shadow: #a93f0f;
+  --color-yellow: #f5c544; /* accent / Book Now on dark */
+  --color-yellow-shadow: #c89416;
+  --color-teal: #2e9aa3; /* secondary accent */
+  --color-teal-press: #1e6e75;
+  --color-teal-shadow: #123b3f;
+  --color-teal-deep-text: #0e2f32;
+  --color-teal-pale: #9fc7c4; /* text on pine */
+  --color-tan: #e7d6b4; /* neutral card / band background */
+  --color-brown-muted: #5a4426; /* muted label text on light */
+  --color-brown-muted-2: #8a6b4a; /* eyebrow text on cream */
+  --color-line-on-ink: rgba(42, 18, 6, 0.2);
+  --color-line-on-cream: rgba(251, 243, 226, 0.3);
+
+  /* Type */
+  --font-display: "Bowlby One", cursive;
+  --font-body: "Karla", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  /* Radii / motion */
+  --radius-pill: 999px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Layout */
+  --content-max: 1440px;
+  --gutter: clamp(20px, 5vw, 56px);
+}

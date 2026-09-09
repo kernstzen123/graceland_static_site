@@ -1,0 +1,58 @@
+.rate-table {
+  background: var(--color-cream);
+  border: 3px solid var(--color-ink);
+}
+
+.rate-table-head {
+  border-bottom: 3px solid var(--color-ink);
+  padding: 24px 32px;
+}
+
+.rate-table-head--teal {
+  background: var(--color-teal);
+}
+.rate-table-head--tan {
+  background: var(--color-tan);
+}
+
+.rate-table-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.4vw, 32px);
+  color: var(--color-pine);
+}
+
+.rate-table-subtitle {
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 600;
+  margin-top: 6px;
+}
+.rate-table-head--teal .rate-table-subtitle {
+  color: var(--color-teal-deep-text);
+}
+.rate-table-head--tan .rate-table-subtitle {
+  color: var(--color-brown-muted);
+}
+
+.rate-table-rows {
+  padding: 16px 32px 28px;
+}
+
+.rate-table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 2px solid var(--color-line-on-ink);
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--color-ink);
+}
+.rate-table-row:last-child {
+  border-bottom: none;
+}
+
+.rate-table-price {
+  font-family: var(--font-display);
+}
+
+.rate-table-price--free {
+  color: var(--color-tangerine);
+}

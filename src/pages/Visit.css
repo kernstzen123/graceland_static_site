@@ -1,0 +1,154 @@
+.visit-page {
+  background: var(--color-cream);
+}
+
+.visit-title-block {
+  padding: clamp(48px, 8vw, 80px) var(--gutter) clamp(32px, 5vw, 56px);
+}
+
+.visit-title {
+  font-size: clamp(48px, 8vw, 128px);
+  margin-top: 16px;
+}
+
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 3px solid var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.visit-contact {
+  padding: clamp(32px, 4vw, 56px);
+  border-right: 3px solid var(--color-ink);
+}
+
+.visit-contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.8vw, 34px);
+  color: var(--color-pine);
+}
+
+.visit-contact-list {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.visit-contact-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--color-brown-muted-2);
+}
+
+.visit-contact-value {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.8vw, 40px);
+  color: var(--color-ink);
+  margin-top: 6px;
+}
+
+.visit-contact-value--text {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 700;
+  color: var(--color-pine);
+  margin-top: 6px;
+  word-break: break-word;
+}
+
+.visit-contact-value--plain {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.6vw, 22px);
+  color: var(--color-ink);
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.visit-contact-cta {
+  margin-top: 34px;
+}
+
+.visit-getting {
+  padding: clamp(32px, 4vw, 56px);
+  background: var(--color-tan);
+}
+
+.visit-getting-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.8vw, 34px);
+  color: var(--color-pine);
+}
+
+.visit-getting-body {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.65;
+  color: var(--color-ink);
+  margin-top: 20px;
+}
+
+.visit-map {
+  margin-top: 26px;
+  border: 3px solid var(--color-ink);
+  background: var(--color-cream);
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.visit-map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: saturate(0.85);
+}
+
+.visit-directions-link {
+  margin-top: 14px;
+}
+
+.visit-hours {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: clamp(48px, 8vw, 72px) var(--gutter) clamp(56px, 8vw, 88px);
+}
+
+.visit-hours-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.8vw, 34px);
+  color: var(--color-pine);
+}
+
+.visit-closing {
+  padding: 16px var(--gutter) clamp(56px, 8vw, 88px);
+  background: var(--color-tangerine);
+  text-align: center;
+}
+
+.visit-closing-title {
+  font-size: clamp(44px, 8vw, 112px);
+  color: var(--color-ink);
+  line-height: 0.84;
+}
+
+.visit-closing-btn {
+  margin-top: 32px;
+}
+
+@media (max-width: 900px) {
+  .visit-grid,
+  .visit-hours {
+    grid-template-columns: 1fr;
+  }
+  .visit-contact {
+    border-right: none;
+    border-bottom: 3px solid var(--color-ink);
+  }
+  .visit-map {
+    height: 200px;
+  }
+}

@@ -1,0 +1,80 @@
+.wp-attractions-heading {
+  padding: clamp(56px, 8vw, 90px) var(--gutter) 0;
+}
+
+.wp-attractions-title {
+  font-size: clamp(40px, 5vw, 72px);
+  margin-top: 14px;
+}
+
+.wp-rates {
+  background: var(--color-pine);
+  padding: clamp(56px, 8vw, 96px) var(--gutter);
+}
+
+.wp-rates-heading {
+  text-align: center;
+  margin-bottom: clamp(32px, 5vw, 52px);
+}
+
+.wp-rates-title {
+  font-size: clamp(52px, 7vw, 96px);
+  color: var(--color-cream);
+  margin-top: 14px;
+}
+
+.wp-rates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.wp-times-rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: clamp(48px, 8vw, 80px) var(--gutter) clamp(56px, 8vw, 96px);
+}
+
+.wp-times-title {
+  font-size: clamp(32px, 3.4vw, 48px);
+  letter-spacing: -0.02em;
+}
+
+.wp-subhead {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--color-brown-muted-2);
+  margin: 28px 0 10px;
+  display: block;
+}
+
+.wp-rules-card {
+  background: var(--color-tan);
+  border: 3px solid var(--color-ink);
+  padding: clamp(28px, 4vw, 44px);
+}
+
+.wp-closing {
+  padding: 16px var(--gutter) clamp(56px, 8vw, 88px);
+  background: var(--color-tangerine);
+  text-align: center;
+}
+
+.wp-closing-title {
+  font-size: clamp(46px, 8vw, 112px);
+  color: var(--color-ink);
+  line-height: 0.84;
+}
+
+.wp-closing-btn {
+  margin-top: 32px;
+}
+
+@media (max-width: 900px) {
+  .wp-rates-grid,
+  .wp-times-rules {
+    grid-template-columns: 1fr;
+  }
+}

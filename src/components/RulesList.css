@@ -1,0 +1,29 @@
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.rules-row {
+  display: flex;
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 2px solid var(--color-line-on-ink);
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--color-ink);
+}
+.rules-row:last-child {
+  border-bottom: none;
+}
+
+.rules-icon {
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+.rules-icon--yes {
+  color: #2e7a80;
+}
+.rules-icon--no,
+.rules-icon--warn {
+  color: var(--color-tangerine-shadow);
+}

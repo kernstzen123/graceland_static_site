@@ -1,0 +1,108 @@
+.attraction-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  border-top: 3px solid var(--color-ink);
+}
+.attraction-row:last-child {
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.attraction-row--image-first .attraction-media {
+  order: -1;
+}
+
+.attraction-copy {
+  padding: clamp(32px, 4vw, 56px);
+}
+
+.attraction-copy--teal {
+  background: var(--color-teal);
+}
+.attraction-copy--teal .attraction-title,
+.attraction-copy--teal .attraction-number {
+  color: var(--color-pine);
+}
+.attraction-copy--teal .attraction-body {
+  color: var(--color-teal-deep-text);
+}
+
+.attraction-copy--yellow {
+  background: var(--color-yellow);
+}
+.attraction-copy--yellow .attraction-title,
+.attraction-copy--yellow .attraction-number,
+.attraction-copy--yellow .attraction-body {
+  color: var(--color-ink);
+}
+
+.attraction-copy--tangerine {
+  background: var(--color-tangerine);
+}
+.attraction-copy--tangerine .attraction-title,
+.attraction-copy--tangerine .attraction-number,
+.attraction-copy--tangerine .attraction-body {
+  color: var(--color-ink);
+}
+
+.attraction-copy--tan {
+  background: var(--color-tan);
+}
+.attraction-copy--tan .attraction-title,
+.attraction-copy--tan .attraction-number {
+  color: var(--color-pine);
+}
+.attraction-copy--tan .attraction-body {
+  color: var(--color-ink);
+}
+
+.attraction-number {
+  font-family: var(--font-display);
+  font-size: 26px;
+}
+
+.attraction-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.6vw, 62px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-top: 10px;
+}
+
+.attraction-body {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.6;
+  margin-top: 20px;
+  max-width: 460px;
+}
+
+.attraction-media {
+  min-height: 440px;
+  background: var(--color-pine);
+}
+.attraction-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .attraction-row {
+    grid-template-columns: 1fr;
+  }
+  .attraction-row--image-first .attraction-media {
+    order: 0;
+  }
+  .attraction-media {
+    min-height: 280px;
+  }
+}
+
+/* The 390px design drops the per-row photo entirely and keeps just the
+   compact colour block — the hero photo already carries the imagery. */
+@media (max-width: 640px) {
+  .attraction-media {
+    display: none;
+  }
+}

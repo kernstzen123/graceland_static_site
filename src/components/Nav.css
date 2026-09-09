@@ -1,0 +1,115 @@
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  transition: background-color 0.2s var(--ease), box-shadow 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 1.6vw, 24px);
+  color: var(--color-cream);
+  text-decoration: none;
+  letter-spacing: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.nav-link {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 3px solid transparent;
+}
+
+.nav-link.is-active {
+  border-bottom-color: var(--color-yellow);
+}
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 30px;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.nav-burger span {
+  height: 4px;
+  background: var(--color-yellow);
+  border-radius: 1px;
+}
+
+/* --- Variants --- */
+
+/* Transparent: sits over a hero image, cream text, no background */
+.nav--transparent {
+  background: transparent;
+  border-bottom: 3px solid transparent;
+}
+
+/* Solid: pine background — either a permanently-solid page nav (Water Park)
+   or the scrolled state of a transparent nav (Home / Weddings) */
+.nav--solid {
+  position: fixed;
+  background: var(--color-pine);
+  border-bottom: 3px solid var(--color-ink);
+  box-shadow: 0 8px 0 rgba(42, 18, 6, 0.18);
+}
+.nav--solid .nav-inner {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+/* Teal: Visit page, no hero — dark text on teal */
+.nav--teal {
+  position: sticky;
+  background: var(--color-teal);
+  border-bottom: 3px solid var(--color-ink);
+}
+.nav--teal .nav-inner {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.nav--teal .nav-logo,
+.nav--teal .nav-link {
+  color: var(--color-pine);
+}
+.nav--teal .nav-burger span {
+  background: var(--color-pine);
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-burger {
+    display: flex;
+  }
+  .nav-inner {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
