@@ -4,7 +4,7 @@ export const contact = {
   email: "conny@gracelandvenues.co.za",
   phone: "072 264 4009",
   phoneHref: "tel:+27722644009",
-  bookingHref: "https://droplet-headless-karaoke.ngrok-free.dev/",
+  bookingHref: "https://graceland-booking-site.vercel.app/",
   address: ["Lustigan Road", "Paarl, Western Cape"],
   officeHours: "Mon–Fri 09h00–16h30",
 };
