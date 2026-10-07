@@ -1,6 +1,10 @@
 // Authored SVG wave dividers — one curve family at three amplitudes, per the
 // brief ("section dividers explicit... authored SVG wave shapes, not a CSS
 // skew"). Reused everywhere a colour block hands off to the next.
+// A translucent back layer drifts sideways for a gentle swell; the front
+// layer's height is scrubbed by scroll (see lib/pageAnimations).
+import "./WaveDivider.css";
+
 const PATHS = {
   low: "M0,55 C240,35 480,35 720,50 C960,65 1200,65 1440,50 L1440,100 L0,100 Z",
   mid: "M0,60 C144,12 288,10 432,46 C576,82 720,94 864,66 C1008,38 1152,16 1296,34 C1368,42 1416,54 1440,60 L1440,100 L0,100 Z",
@@ -13,23 +17,20 @@ export default function WaveDivider({
   bg = "transparent",
   flip = false,
   height = 100,
-  className,
+  className = "",
 }) {
   return (
-    <svg
-      viewBox="0 0 1440 100"
-      preserveAspectRatio="none"
+    <div
+      className={`wave ${className}`}
       aria-hidden="true"
-      className={className}
-      style={{
-        display: "block",
-        width: "100%",
-        height,
-        background: bg,
-        transform: flip ? "scaleY(-1)" : undefined,
-      }}
+      style={{ height, background: bg, transform: flip ? "scaleY(-1)" : undefined }}
     >
-      <path d={PATHS[amplitude]} fill={fill} />
-    </svg>
+      <svg className="wave-back" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d={PATHS[amplitude]} fill={fill} />
+      </svg>
+      <svg className="wave-front" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d={PATHS[amplitude]} fill={fill} />
+      </svg>
+    </div>
   );
 }

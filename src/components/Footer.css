@@ -1,10 +1,14 @@
 .footer {
   background: var(--color-pine);
   padding: clamp(40px, 6vw, 64px) var(--gutter) clamp(28px, 4vw, 44px);
-  display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 48px;
   color: var(--color-cream);
+  overflow: hidden;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: 48px;
 }
 
 .footer-brand {
@@ -42,7 +46,7 @@
   color: var(--color-yellow);
 }
 
-.footer--simple {
+.footer--simple .footer-grid {
   align-items: start;
 }
 .footer--simple .footer-col {
@@ -51,9 +55,11 @@
 
 @media (max-width: 720px) {
   .footer {
+    padding: 32px var(--gutter) 40px;
+  }
+  .footer-grid {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 32px var(--gutter) 40px;
   }
 }
 
@@ -62,4 +68,70 @@
   .footer {
     padding-bottom: 110px;
   }
+}
+
+/* --- Makeover: giant wordmark sign-off ------------------------------------ */
+.footer-col a {
+  background: linear-gradient(var(--color-yellow), var(--color-yellow)) 0 100% / 0 2px no-repeat;
+  transition: background-size 0.45s var(--ease), color 0.2s;
+}
+.footer-col a:hover {
+  background-size: 100% 2px;
+}
+
+.footer-bottom {
+  margin-top: clamp(40px, 6vw, 72px);
+  border-top: 2px solid var(--color-line-on-cream);
+  padding-top: 8px;
+}
+
+.footer-wordmark {
+  font-family: var(--font-display);
+  /* the word is ~6.5em wide: fill the content box exactly at any width */
+  font-size: min(calc((100vw - 2 * var(--gutter)) / 6.6), 220px);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(251, 243, 226, 0.4);
+  white-space: nowrap;
+  text-align: center;
+  user-select: none;
+}
+.footer-wordmark .split-char {
+  transition: color 0.5s var(--ease), -webkit-text-stroke-color 0.5s;
+}
+.footer-wordmark .split-char:hover {
+  color: var(--color-yellow);
+  -webkit-text-stroke-color: var(--color-yellow);
+}
+
+.footer-legal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--color-teal-pale);
+}
+
+.footer-top {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-yellow);
+  background: none;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.footer-top:hover {
+  background: var(--color-yellow);
+  color: var(--color-ink);
 }

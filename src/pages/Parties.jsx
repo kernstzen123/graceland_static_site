@@ -1,3 +1,5 @@
+import LiquidBackdrop from "../components/LiquidBackdrop";
+import SplitText from "../components/SplitText";
 import Hero from "../components/Hero";
 import WaveDivider from "../components/WaveDivider";
 import RateTable from "../components/RateTable";
@@ -43,7 +45,7 @@ export default function Parties() {
 
       <div className="parties-intro container">
         <span className="eyebrow">— WHAT'S INCLUDED</span>
-        <h2 className="headline parties-intro-title">THE PARTY EXPERIENCE</h2>
+        <SplitText as="h2" className="headline parties-intro-title">THE PARTY EXPERIENCE</SplitText>
         <ul className="parties-includes-list">
           {partyIncludes.map((item, i) => (
             <li key={i}>{item}</li>
@@ -51,10 +53,11 @@ export default function Parties() {
         </ul>
       </div>
 
-      <div className="parties-rates">
+      <div className="parties-rates has-liquid">
+        <LiquidBackdrop palette="pine" bubbles={false} />
         <div className="parties-rates-heading">
           <span className="eyebrow eyebrow--on-dark">— WHAT IT COSTS</span>
-          <h2 className="headline parties-rates-title">PACKAGES</h2>
+          <SplitText as="h2" className="headline parties-rates-title">PACKAGES</SplitText>
         </div>
         <div className="parties-rates-grid">
           <RateTable {...partyPackages} headTone="teal" />
@@ -67,7 +70,7 @@ export default function Parties() {
 
       <div className="parties-times-rules container">
         <div>
-          <h2 className="headline parties-times-title">PARTY SLOTS</h2>
+          <SplitText as="h2" className="headline parties-times-title">PARTY SLOTS</SplitText>
           <span className="parties-subhead">CHOOSE YOUR TIME</span>
           <HoursList rows={partyHours} closedNote={closedNote} />
           <p className="parties-note">
@@ -76,18 +79,19 @@ export default function Parties() {
           </p>
         </div>
         <div className="parties-rules-card">
-          <h2 className="headline parties-times-title">CATERING & RULES</h2>
+          <SplitText as="h2" className="headline parties-times-title">CATERING & RULES</SplitText>
           <RulesList rules={partyRules} />
         </div>
       </div>
 
       <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="parties-closing">
-        <h2 className="headline parties-closing-title">
+      <div className="parties-closing has-liquid">
+        <LiquidBackdrop palette="tangerine" />
+        <SplitText as="h2" className="headline parties-closing-title">
           BOOK YOUR
           <br />
           PARTY TODAY
-        </h2>
+        </SplitText>
         <div className="parties-closing-btn">
           <BookNowButton size="hero" />
         </div>

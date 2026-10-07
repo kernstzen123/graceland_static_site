@@ -31,3 +31,15 @@
   font-weight: 700;
   color: var(--color-tangerine-shadow);
 }
+
+/* Long day labels ("Sunday and Public Holidays") left no room for the times
+   on phones and pushed them out of their card — stack them instead. */
+@media (max-width: 720px) {
+  .hours-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hours-time {
+    text-align: left;
+  }
+}

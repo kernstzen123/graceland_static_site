@@ -1,3 +1,5 @@
+import LiquidBackdrop from "../components/LiquidBackdrop";
+import SplitText from "../components/SplitText";
 import Hero from "../components/Hero";
 import WaveDivider from "../components/WaveDivider";
 import Button from "../components/Button";
@@ -49,12 +51,12 @@ export default function Weddings() {
       <div className="setting container">
         <div>
           <span className="eyebrow">— THE SETTING</span>
-          <h2 className="headline setting-title">
+          <SplitText as="h2" className="headline setting-title">
             A GARDEN,
             <br />
             A WATERFALL,
             <br />A RED CARPET
-          </h2>
+          </SplitText>
           <p className="setting-body">
             The garden ceremony includes the pergola, waterfall feature, red
             carpet and white chairs. A serene sanctuary with a lush garden
@@ -76,10 +78,11 @@ export default function Weddings() {
       </div>
 
       <WaveDivider amplitude="low" fill="#123b3f" bg="#fbf3e2" />
-      <div className="wr-section">
+      <div className="wr-section has-liquid">
+        <LiquidBackdrop palette="pine" bubbles={false} />
         <div className="wr-heading">
           <span className="eyebrow eyebrow--on-dark">— {weddingRates.period}</span>
-          <h2 className="headline wr-title">WEDDING RATES</h2>
+          <SplitText as="h2" className="headline wr-title">WEDDING RATES</SplitText>
         </div>
         <div className="wr-cards">
           <div className="wr-card">
@@ -111,7 +114,7 @@ export default function Weddings() {
       <WaveDivider amplitude="low" bg="#123b3f" fill="#fbf3e2" />
 
       <div className="weddings-closing container">
-        <h2 className="headline weddings-closing-title">COME AND SEE IT</h2>
+        <SplitText as="h2" className="headline weddings-closing-title">COME AND SEE IT</SplitText>
         <p className="weddings-closing-sub">
           Walk the garden with Conny. No forms — just ring or write.
         </p>

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { nav as navItems } from "../data/content";
 import BookNowButton from "./BookNowButton";
 import MobileNavOverlay from "./MobileNavOverlay";
+import { lockScroll } from "../lib/motion";
 import "./Nav.css";
 
 /**
@@ -16,20 +17,27 @@ import "./Nav.css";
 export default function Nav({ variant = "transparent" }) {
   const [scrolled, setScrolled] = useState(variant !== "transparent");
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
+  // Solid once past the hero; tucks away while scrolling down and slides
+  // back the moment you scroll up.
   useEffect(() => {
-    if (variant !== "transparent") return;
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (variant === "transparent") setScrolled(y > 60);
+      if (y < 240 || y < last - 2) setHidden(false);
+      else if (y > last + 2) setHidden(true);
+      last = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [variant]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    lockScroll(open);
+    return () => lockScroll(false);
   }, [open]);
 
   const isTeal = variant === "teal";
@@ -38,6 +46,7 @@ export default function Nav({ variant = "transparent" }) {
   const navClass = [
     "nav",
     isTeal ? "nav--teal" : isSolid ? "nav--solid" : "nav--transparent",
+    hidden && !open ? "nav--hidden" : "",
   ].join(" ");
 
   return (

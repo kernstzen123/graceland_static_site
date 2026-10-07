@@ -1,0 +1,80 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--color-pine);
+  color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+}
+
+.preloader-word {
+  display: flex;
+  font-family: var(--font-display);
+  font-size: clamp(48px, 13vw, 210px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.preloader-mask {
+  display: inline-block;
+  overflow: clip;
+  padding: 0.1em 0.01em;
+}
+
+.preloader-char {
+  display: inline-block;
+}
+.preloader-mask:nth-child(3n + 2) .preloader-char {
+  color: var(--color-yellow);
+}
+
+.preloader-meta {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--color-teal-pale);
+}
+
+.preloader-count {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: 0;
+  color: var(--color-tangerine);
+  line-height: 1;
+}
+
+.preloader-bar {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 40px;
+  height: 3px;
+  background: rgba(251, 243, 226, 0.15);
+}
+.preloader-bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-yellow), var(--color-tangerine));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.preloader-wave {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 90px;
+  margin-top: -1px;
+  transform-origin: 50% 0;
+}

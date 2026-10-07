@@ -27,6 +27,41 @@ npm run preview   # serve the production build locally
   `StatsBand`, `Marquee`, `Footer`, `StickyBookNow`, `WeatherWidget`.
 - `src/pages/` — Home, WaterPark, Parties, Weddings, Visit, Gallery, PrivacyPolicy, Terms.
 
+## Motion & visual effects
+
+The makeover layers a motion system over the original "Sun-bleached
+Poolside" design without changing its palette, type or content.
+
+- **Smooth scroll — [Lenis](https://lenis.dev).** One instance, started in
+  `main.jsx` and driven by GSAP's ticker (`src/lib/motion.js`) so
+  ScrollTrigger and smooth scrolling stay in lockstep. Route changes and
+  `#hash` links scroll through Lenis; the mobile menu and intro pause it.
+- **WebGL scenes (Unicorn Studio-inspired)** — `components/ShaderCanvas.jsx`,
+  raw WebGL, no three.js:
+  - *water* — every hero photo ripples under the cursor, flows with
+    fbm noise, gets subtle chromatic fringing and sun glints, and warps/zooms
+    as you scroll away. The plain `<img>` stays underneath as the instant
+    paint, alt text and no-WebGL fallback.
+  - *liquid* — a slow domain-warped gradient with print grain behind the
+    stats band, rates sections and every tangerine closing CTA
+    (`components/LiquidBackdrop.jsx`, which also adds rising bubbles).
+  - Canvases stop rendering when off-screen or the tab is hidden.
+- **Scroll choreography** — `src/lib/pageAnimations.js` applies one motion
+  language to every page from existing class names: char-by-char masked
+  headline reveals (`components/SplitText.jsx`), eyebrow wipes, staggered
+  cards/rows, image curtain reveals with inner parallax, count-up numbers,
+  scroll-scrubbed wave dividers and a hero that drifts away as you scroll.
+- **Chrome** — `components/MotionLayer.jsx`: animated film grain, a scroll
+  progress rail, a cursor follower that turns into a "LOOK" lens over
+  photos, magnetic buttons, and tilt + spotlight rate cards.
+- **Intro & transitions** — a once-per-session preloader
+  (`Preloader.jsx`) and a wave-edged curtain on every route change
+  (`RouteTransition.jsx`). The nav turns to frosted glass, hides on scroll
+  down and returns on scroll up; the scroll-reactive marquee speeds up,
+  leans and reverses with your scroll.
+- **Reduced motion** is respected everywhere: no Lenis, no intro, no
+  reveals, and the shaders render a single still frame.
+
 ## Decisions worth knowing about
 
 - **Book Now everywhere.** The brief's explicit rule is that Book Now is

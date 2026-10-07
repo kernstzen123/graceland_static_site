@@ -147,3 +147,192 @@ p {
   outline: 3px solid var(--color-teal);
   outline-offset: 2px;
 }
+
+/* ==========================================================================
+   Motion layer
+   ========================================================================== */
+
+/* Lenis recommended base styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+.lenis.lenis-smooth:not(.lenis-scrolling) iframe {
+  pointer-events: auto;
+}
+
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+/* SplitText: each word is a clipping mask its characters rise through.
+   Padding + matching negative margin gives tall display glyphs room inside
+   the mask without changing the headline's line spacing. */
+.split-word {
+  display: inline-block;
+  overflow: clip;
+  padding: 0.14em 0.03em 0.12em;
+  margin: -0.14em -0.03em -0.12em;
+  vertical-align: top;
+}
+.split-word-inner,
+.split-char {
+  display: inline-block;
+}
+.split-char {
+  will-change: transform;
+}
+
+/* Film grain across the whole site — the analogue texture that ties the
+   WebGL scenes to the flat colour blocks. */
+.site-grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  animation: grain 0.9s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-4%, 3%); }
+  40% { transform: translate(3%, -5%); }
+  60% { transform: translate(-2%, 6%); }
+  80% { transform: translate(5%, -2%); }
+  100% { transform: translate(-3%, 1%); }
+}
+
+/* Scroll progress rail */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 200;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--color-yellow), var(--color-tangerine));
+  pointer-events: none;
+}
+
+/* Spotlight + tilt for cards (driven by components/Pointer.jsx) */
+.rate-table,
+.wr-card,
+.wr-extra,
+.wp-rules-card,
+.parties-rules-card {
+  position: relative;
+  transition: box-shadow 0.5s var(--ease);
+}
+.rate-table::after,
+.wr-card::after,
+.wr-extra::after,
+.wp-rules-card::after,
+.parties-rules-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(245, 197, 68, 0.28),
+    transparent 60%
+  );
+  mix-blend-mode: soft-light;
+}
+.is-tilting::after {
+  opacity: 1;
+}
+.rate-table.is-tilting,
+.wr-card.is-tilting,
+.wp-rules-card.is-tilting,
+.parties-rules-card.is-tilting {
+  box-shadow: 10px 14px 0 var(--color-ink);
+}
+.wr-extra.is-tilting {
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Custom cursor follower (fine pointers only; native cursor stays visible) */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9500;
+  pointer-events: none;
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor {
+    display: block;
+  }
+}
+.cursor-ring {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border-radius: 50%;
+  border: 2px solid var(--color-tangerine);
+  display: grid;
+  place-items: center;
+  transition: width 0.35s var(--ease), height 0.35s var(--ease), margin 0.35s var(--ease),
+    background-color 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.3s;
+}
+.cursor-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s, transform 0.35s var(--ease);
+}
+.cursor.is-link .cursor-ring {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: rgba(245, 197, 68, 0.25);
+  border-color: var(--color-yellow);
+}
+.cursor.is-view .cursor-ring {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  background: var(--color-yellow);
+  border-color: var(--color-yellow);
+}
+.cursor.is-view .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+.cursor.is-hidden .cursor-ring {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-grain {
+    animation: none;
+  }
+  .cursor {
+    display: none !important;
+  }
+}
+
+html.is-scroll-locked {
+  overflow: hidden;
+}

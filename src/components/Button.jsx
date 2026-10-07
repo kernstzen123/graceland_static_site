@@ -25,8 +25,13 @@ export default function Button({
 
   const content = (
     <>
-      {children}
-      {arrow ? " →" : ""}
+      <span className="btn-label">{children}</span>
+      {arrow && (
+        <span className="btn-arrow" aria-hidden="true">
+          <span>→</span>
+          <span>→</span>
+        </span>
+      )}
     </>
   );
 

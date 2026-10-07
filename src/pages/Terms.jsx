@@ -1,3 +1,4 @@
+import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import "./Legal.css";
@@ -9,7 +10,7 @@ export default function Terms() {
       
       <div className="legal-header container">
         <span className="eyebrow">— THE RULES OF PLAY</span>
-        <h1 className="headline legal-title">TERMS & CONDITIONS</h1>
+        <SplitText as="h1" className="headline legal-title">TERMS & CONDITIONS</SplitText>
       </div>
 
       <div className="legal-content container">

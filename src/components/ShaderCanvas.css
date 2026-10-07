@@ -1,0 +1,13 @@
+.shader-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+  pointer-events: none;
+}
+.shader-canvas.is-ready {
+  opacity: 1;
+}

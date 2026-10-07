@@ -67,3 +67,61 @@
 .mobile-overlay-footer .btn {
   width: 100%;
 }
+
+/* --- Makeover: circular wipe in from the burger, staggered links ---------- */
+.mobile-overlay {
+  animation: overlay-in 0.75s cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+@keyframes overlay-in {
+  from {
+    clip-path: circle(0% at calc(100% - 40px) 40px);
+  }
+  to {
+    clip-path: circle(150% at calc(100% - 40px) 40px);
+  }
+}
+
+.mobile-overlay-links a {
+  display: block;
+  animation: overlay-link-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.mobile-overlay-links a:nth-child(1) { animation-delay: 0.22s; }
+.mobile-overlay-links a:nth-child(2) { animation-delay: 0.28s; }
+.mobile-overlay-links a:nth-child(3) { animation-delay: 0.34s; }
+.mobile-overlay-links a:nth-child(4) { animation-delay: 0.4s; }
+.mobile-overlay-links a:nth-child(5) { animation-delay: 0.46s; }
+@keyframes overlay-link-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) rotate(4deg);
+  }
+}
+.mobile-overlay-footer {
+  animation: overlay-link-in 0.8s 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* soft liquid blobs behind the menu */
+.mobile-overlay::before {
+  content: "";
+  position: absolute;
+  width: 120vw;
+  height: 120vw;
+  right: -60vw;
+  bottom: -50vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46, 154, 163, 0.45), transparent 60%);
+  animation: hero-glow-drift 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.mobile-overlay > * {
+  position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-overlay,
+  .mobile-overlay::before,
+  .mobile-overlay-links a,
+  .mobile-overlay-footer {
+    animation: none;
+  }
+}
