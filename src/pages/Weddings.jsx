@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import LaneRope from "../components/LaneRope";
+import WaterEdge from "../components/WaterEdge";
 import Button from "../components/Button";
 import BookNowButton from "../components/BookNowButton";
 import ClosingPool from "../components/ClosingPool";
@@ -59,8 +59,8 @@ export default function Weddings() {
         </div>
       </section>
 
-      <LaneRope top="var(--foam)" bottom="var(--deep)" />
-      <section className="deep-band tiles--deep" aria-labelledby="wr-title">
+      <WaterEdge top="var(--foam)" bottom="var(--deep)" />
+      <section className="deep-band bg-deep" aria-labelledby="wr-title">
         <div className="container">
           <div className="section-head section-head--center">
             <span className="eyebrow eyebrow--on-dark">{weddingRates.period}</span>
@@ -96,7 +96,7 @@ export default function Weddings() {
           </div>
         </div>
       </section>
-      <LaneRope top="var(--deep)" bottom="var(--pool)" />
+      <WaterEdge top="var(--deep)" bottom="var(--pool)" />
 
       <ClosingPool title="Come and see it" sub="Walk the garden with Conny. No forms, just ring or write.">
         <BookNowButton size="lg" />

@@ -116,21 +116,16 @@ p {
   background-size: 100% 100%;
 }
 
-/* Pool-floor tiles: a reusable background for pool-blue sections */
-.tiles {
+/* Section backgrounds: clear pool water and the deep end. Plain colour with
+   a soft patch of sunlight, no pattern. */
+.bg-pool {
   background-color: var(--pool);
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.22) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 2px, transparent 2px);
-  background-size: 44px 44px;
+  background-image: radial-gradient(120% 90% at 15% 0%, rgba(255, 255, 255, 0.22), transparent 60%);
 }
 
-.tiles--deep {
+.bg-deep {
   background-color: var(--deep);
-  background-image:
-    linear-gradient(rgba(143, 224, 247, 0.08) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(143, 224, 247, 0.08) 2px, transparent 2px);
-  background-size: 44px 44px;
+  background-image: radial-gradient(110% 80% at 85% 0%, rgba(39, 193, 238, 0.14), transparent 60%);
 }
 
 .sr-only {

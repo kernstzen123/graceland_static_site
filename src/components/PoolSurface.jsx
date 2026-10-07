@@ -5,7 +5,8 @@ import "./PoolSurface.css";
 /**
  * A pool you can splash. A small CPU height-field (wave equation) holds the
  * water surface; a WebGL shader renders the tiled pool floor seen through it
- * (refraction, sunlight caustics, specular glints, a painted lane line).
+ * (refraction, sunlight caustics, specular glints) — or, with `image`, a real
+ * photo seen through the water.
  *
  * Elements matching `floatSelector` inside the host bob on the actual water
  * height under them, so a splash near the headline rocks its letters.
@@ -29,8 +30,9 @@ uniform sampler2D uH;
 uniform vec2 uTexel;
 uniform vec2 uRes;
 uniform float uTime;
-uniform float uTile;
-uniform float uLane;
+uniform sampler2D uPhoto;
+uniform vec2 uPhotoSize;
+uniform float uUsePhoto;
 
 #define TAU 6.28318530718
 
@@ -61,40 +63,31 @@ void main() {
   vec2 grad = vec2(hr - hl, hu - hd);
   vec3 n = normalize(vec3(-grad * 2.2, 1.0));
 
-  // refracted view of the floor
-  vec2 fuv = uv + n.xy * 0.022;
-  vec2 px = fuv * uRes;
-
-  vec3 shallow = vec3(0.36, 0.84, 0.97);
-  vec3 deep = vec3(0.09, 0.62, 0.86);
-  vec3 col = mix(deep, shallow, smoothstep(0.0, 1.0, uv.y * 0.9 + 0.1));
-
-  // tiles + grout
-  vec2 g = fract(px / uTile);
-  vec2 e = min(g, 1.0 - g) * uTile;
-  float grout = 1.0 - smoothstep(1.0, 2.2, min(e.x, e.y));
-  col = mix(col, vec3(0.80, 0.96, 1.0), grout * 0.55);
-
-  // painted lane line with its T near the far wall
-  float lw = uTile * 0.55;
-  float lane = step(abs(px.x - uLane * uRes.x), lw) * step(uTile * 2.0, px.y) * step(px.y, uRes.y - uTile * 1.5);
-  float tee = step(abs(px.y - (uRes.y - uTile * 2.0)), lw) * step(abs(px.x - uLane * uRes.x), uTile * 2.2);
-  col = mix(col, vec3(0.03, 0.22, 0.42), max(lane, tee) * 0.8);
-
-  // caustics drift slowly; ripples bend them
-  vec2 cuv = fuv * vec2(uRes.x / uRes.y, 1.0) * 0.55;
-  float c = caustic(cuv + 0.3 * n.xy, uTime * 0.35);
-  col += c * 0.5;
+  vec3 col;
+  if (uUsePhoto > 0.5) {
+    // a real photo seen through the water: refract it, nothing more
+    vec2 puv = uv + n.xy * 0.009;
+    float rs = uRes.x / uRes.y, ri = uPhotoSize.x / uPhotoSize.y;
+    vec2 sc = rs > ri ? vec2(1.0, ri / rs) : vec2(rs / ri, 1.0);
+    col = texture2D(uPhoto, (puv - 0.5) * sc + 0.5).rgb;
+  } else {
+    // open water: a soft shallow-to-deep blue with drifting sunlight caustics
+    vec2 fuv = uv + n.xy * 0.022;
+    vec3 shallow = vec3(0.36, 0.84, 0.97);
+    vec3 deep = vec3(0.09, 0.62, 0.86);
+    col = mix(deep, shallow, smoothstep(0.0, 1.0, uv.y * 0.9 + 0.1));
+    vec2 cuv = fuv * vec2(uRes.x / uRes.y, 1.0) * 0.55;
+    col += caustic(cuv + 0.3 * n.xy, uTime * 0.35) * 0.45;
+  }
 
   // light & shade from the surface slope, plus sun glints
-  col *= 1.0 + dot(n.xy, vec2(-0.6, 0.8)) * 0.9;
+  // (much gentler over a photo, so it stays a clear, true picture)
+  float k = mix(1.0, 0.22, uUsePhoto);
+  col *= 1.0 + dot(n.xy, vec2(-0.6, 0.8)) * 0.9 * k;
   vec3 L = normalize(vec3(-0.35, 0.55, 1.0));
   float spec = pow(max(dot(reflect(-L, n), vec3(0.0, 0.0, 1.0)), 0.0), 70.0);
-  col += spec * 0.9;
+  col += spec * 0.9 * k;
 
-  // soft edge so the pool reads as a body of water, not a texture
-  vec2 v = vUv * (1.0 - vUv);
-  col *= mix(0.86, 1.0, smoothstep(0.0, 0.06, v.x * v.y * 4.0));
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -112,7 +105,7 @@ function compile(gl, type, src) {
 export default function PoolSurface({
   floatSelector,
   ambient = true,
-  lane = 0.86, // x position of the painted lane line (0–1); negative hides it
+  image,
   splashOnEnter = false,
   onSplash,
 }) {
@@ -142,9 +135,10 @@ export default function PoolSurface({
     gl.enableVertexAttribArray(aPos);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
     const u = (n) => gl.getUniformLocation(prog, n);
-    const uTexel = u("uTexel"), uRes = u("uRes"), uTime = u("uTime"), uTile = u("uTile");
-    gl.uniform1f(u("uLane"), lane);
+    const uTexel = u("uTexel"), uRes = u("uRes"), uTime = u("uTime");
     gl.uniform1i(u("uH"), 0);
+    gl.uniform1i(u("uPhoto"), 1);
+    gl.uniform1f(u("uUsePhoto"), 0);
 
     const tex = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -249,7 +243,6 @@ export default function PoolSurface({
         gl.viewport(0, 0, w, h);
       }
       gl.uniform2f(uRes, w, h);
-      gl.uniform1f(uTile, 46 * dpr);
     };
 
     const draw = (t) => {
@@ -259,6 +252,7 @@ export default function PoolSurface({
         const v = cur[i] * 0.25 + 0.5;
         bytes[i] = v <= 0 ? 0 : v >= 1 ? 255 : v * 255;
       }
+      gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, s.W, s.H, 0, gl.LUMINANCE, gl.UNSIGNED_BYTE, bytes);
       gl.uniform1f(uTime, t);
@@ -352,9 +346,38 @@ export default function PoolSurface({
       }, 1400);
     });
 
-    canvas.classList.add("is-ready");
-    if (reduced) draw(4);
-    else kick();
+    let photoTex = null;
+    const start = () => {
+      canvas.classList.add("is-ready");
+      if (reduced) draw(4);
+      else kick();
+    };
+    if (image) {
+      // The <img> under the canvas paints instantly; the canvas fades in over
+      // it once the same photo is on the GPU.
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        if (s.disposed) return;
+        photoTex = gl.createTexture();
+        gl.activeTexture(gl.TEXTURE1);
+        gl.bindTexture(gl.TEXTURE_2D, photoTex);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.uniform2f(u("uPhotoSize"), img.naturalWidth, img.naturalHeight);
+        gl.uniform1f(u("uUsePhoto"), 1);
+        start();
+      };
+      img.src = image;
+    } else {
+      start();
+    }
 
     return () => {
       s.disposed = true;
@@ -369,12 +392,13 @@ export default function PoolSurface({
         f.el.style.rotate = "";
       });
       gl.deleteTexture(tex);
+      if (photoTex) gl.deleteTexture(photoTex);
       gl.deleteBuffer(buf);
       gl.deleteProgram(prog);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
     };
-  }, [floatSelector, ambient, lane, splashOnEnter]);
+  }, [floatSelector, ambient, image, splashOnEnter]);
 
   return <canvas ref={ref} className="pool-surface" aria-hidden="true" />;
 }

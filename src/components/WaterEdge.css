@@ -1,0 +1,42 @@
+.water-edge {
+  position: relative;
+  height: 56px;
+  overflow: hidden;
+  /* overlap by a hair to avoid sub-pixel seams with neighbours */
+  margin: -1px 0;
+}
+
+/* Each svg is two swells wide and slides one swell's width, so it loops. */
+.water-edge svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  overflow: visible;
+}
+
+.water-edge-back {
+  opacity: 0.45;
+  height: 120% !important;
+  animation: swell-drift 14s linear infinite reverse;
+}
+
+.water-edge-front {
+  animation: swell-drift 9s linear infinite;
+}
+
+@keyframes swell-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-edge svg {
+    animation: none;
+  }
+}
