@@ -1,29 +1,46 @@
 .rules-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
 }
 
 .rules-row {
   display: flex;
+  align-items: center;
   gap: 16px;
-  padding: 15px 0;
-  border-bottom: 2px solid var(--color-line-on-ink);
-  font-size: clamp(16px, 1.4vw, 19px);
-  color: var(--color-ink);
+  padding: 12px 0;
+  border-bottom: 2px dashed var(--line);
+  font-size: 18px;
+  font-weight: 500;
 }
 .rules-row:last-child {
   border-bottom: none;
 }
 
 .rules-icon {
-  font-family: var(--font-display);
-  flex-shrink: 0;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2.5px solid var(--deep);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--deep);
+  transition: transform 0.5s var(--ease-bounce);
+}
+.rules-row:hover .rules-icon {
+  transform: rotate(-12deg) scale(1.15);
 }
 .rules-icon--yes {
-  color: #2e7a80;
+  background: #5fe08f;
 }
-.rules-icon--no,
+.rules-icon--no {
+  background: var(--lilo);
+}
 .rules-icon--warn {
-  color: var(--color-tangerine-shadow);
+  background: var(--lemon);
 }

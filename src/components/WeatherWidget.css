@@ -1,42 +1,39 @@
+/* Poolside weather board: a lemon sign card with a live dot */
 .weather-widget {
-  background: var(--color-pine);
-  border: 3px solid var(--color-ink);
-  padding: 16px 20px;
-  color: var(--color-cream);
-  min-width: 180px;
-  box-shadow: 4px 4px 0 var(--color-ink);
-  transform: rotate(-2deg);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--lemon);
+  border: 2.5px solid var(--deep);
+  border-radius: var(--radius-md);
+  padding: 16px 20px 18px;
+  color: var(--deep);
+  min-width: 220px;
+  box-shadow: 0 6px 0 var(--deep);
+  rotate: -2deg;
+  transition: rotate 0.5s var(--ease-bounce);
 }
-
 .weather-widget:hover {
-  transform: rotate(0deg) translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--color-ink);
+  rotate: 1deg;
 }
 
 .weather-widget-top {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
-  border-bottom: 2px solid var(--color-teal);
-  padding-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .weather-widget-live {
-  width: 8px;
-  height: 8px;
-  background-color: var(--color-tangerine);
+  width: 9px;
+  height: 9px;
+  background-color: var(--lilo);
   border-radius: 50%;
-  animation: pulse-tangerine 2s infinite;
+  animation: pulse-live 2s infinite;
 }
 
 .weather-widget-title {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  color: var(--color-tan);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  font-weight: 500;
 }
 
 .weather-widget-main {
@@ -47,27 +44,19 @@
 
 .weather-widget-temp {
   font-family: var(--font-display);
-  font-size: 42px;
-  color: var(--color-yellow);
+  font-size: 56px;
   line-height: 0.9;
 }
 
 .weather-widget-details {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-size: 12px;
+  letter-spacing: 0.08em;
   line-height: 1.6;
-  color: var(--color-cream);
 }
 
-@keyframes pulse-tangerine {
-  0% {
-    box-shadow: 0 0 0 0 rgba(233, 96, 31, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(233, 96, 31, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(233, 96, 31, 0);
-  }
+@keyframes pulse-live {
+  0% { box-shadow: 0 0 0 0 rgba(255, 92, 138, 0.8); }
+  70% { box-shadow: 0 0 0 7px rgba(255, 92, 138, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 92, 138, 0); }
 }

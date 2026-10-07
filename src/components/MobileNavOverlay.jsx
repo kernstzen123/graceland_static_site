@@ -5,9 +5,9 @@ import "./MobileNavOverlay.css";
 
 export default function MobileNavOverlay({ onClose }) {
   return (
-    <div className="mobile-overlay" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div className="mobile-overlay tiles" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="mobile-overlay-top">
-        <span className="mobile-overlay-logo">GRACELAND</span>
+        <span className="mobile-overlay-logo">Graceland</span>
         <button className="mobile-overlay-close" aria-label="Close menu" onClick={onClose}>
           ✕
         </button>
@@ -20,7 +20,7 @@ export default function MobileNavOverlay({ onClose }) {
             onClick={onClose}
             className={({ isActive }) => (isActive ? "is-active" : "")}
           >
-            {item.label.toUpperCase()}
+            {item.label}
           </NavLink>
         ))}
       </nav>

@@ -8,28 +8,33 @@
   justify-content: space-between;
   gap: 16px;
   padding: 14px 0;
-  border-bottom: 2px solid var(--color-line-on-ink);
-  font-size: clamp(16px, 1.4vw, 19px);
-  color: var(--color-ink);
+  border-bottom: 2px dashed var(--line);
+  font-size: 18px;
 }
 .hours-row:last-child {
   border-bottom: none;
 }
 
 .hours-day {
-  font-weight: 700;
+  font-weight: 750;
   flex-shrink: 0;
 }
 
 .hours-time {
   text-align: right;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .hours-closed-note {
   margin-top: 16px;
-  font-size: clamp(15px, 1.2vw, 17px);
   font-weight: 700;
-  color: var(--color-tangerine-shadow);
+  font-size: 16px;
+  background: var(--lemon);
+  border: 2px solid var(--deep);
+  border-radius: 14px;
+  padding: 10px 14px;
 }
 
 /* Long day labels ("Sunday and Public Holidays") left no room for the times

@@ -35,7 +35,7 @@ export default function Marquee() {
     <div className="marquee" aria-hidden="true">
       <div className="marquee-track" ref={trackRef}>
         {track.map((item, i) => (
-          <span key={i} style={{ display: "flex", alignItems: "center", gap: "34px" }}>
+          <span key={i} style={{ display: "flex", alignItems: "center", gap: "30px" }}>
             <span className="marquee-item">{item.toUpperCase()}</span>
             <span className="marquee-dot">✳</span>
           </span>

@@ -8,13 +8,13 @@ const STAGGER_GROUPS = [
   ".wr-card",
   ".wr-extra",
   ".setting-stat",
-  ".stats-item",
   ".rules-row",
   ".hours-row",
   ".parties-includes-list li",
   ".visit-contact-list > div",
-  ".attraction-copy > *",
   ".footer-grid > *",
+  ".split-panel",
+  ".snap",
 ];
 
 const PARALLAX_IMAGES = [
@@ -22,16 +22,27 @@ const PARALLAX_IMAGES = [
   ".setting-images img",
   ".attraction-media img",
   ".gallery-grid img",
-  ".gallery-page-grid img",
 ];
 
 const REVEAL_BLOCKS = [
-  ".hours-today",
-  ".wp-rules-card",
-  ".parties-rules-card",
-  ".visit-map",
+  ".card",
+  ".planner-card",
+  ".attraction-row",
   ".legal-content",
 ];
+
+// Intro companions that wait for the hero headline (inner heroes, the pool
+// hero and the plain title bands).
+const HERO_BITS = [
+  ".hero-content .eyebrow",
+  ".hero-content .hero-body",
+  ".hero-content .hero-meta > *",
+  ".pool-hero-content .eyebrow",
+  ".pool-hero-sub",
+  ".pool-hero-content .hero-meta > *",
+  ".page-title .eyebrow",
+  ".gallery-hint",
+].join(",");
 
 function countUp(el) {
   // Keep the real value on the element so a re-run (StrictMode, HMR) after a
@@ -90,7 +101,7 @@ export function initPageAnimations(root) {
 
     // Hero headline + its companions play once the intro curtain lifts.
     const heroChars = q('[data-split="hero"] .split-char');
-    const heroBits = q(".hero-content .eyebrow, .hero-content .hero-body, .hero-content .hero-meta > *");
+    const heroBits = q(HERO_BITS);
     if (heroChars.length) {
       gsap.set(heroChars, { yPercent: 120, rotate: 10, opacity: 0 });
       gsap.set(heroBits, { y: 30, opacity: 0 });
@@ -117,7 +128,7 @@ export function initPageAnimations(root) {
 
     // --- Eyebrows: wipe in from the left ------------------------------------
     q(".eyebrow").forEach((el) => {
-      if (el.closest(".hero-content")) return;
+      if (el.closest(".hero-content, .pool-hero-content, .page-title")) return;
       gsap.fromTo(el, { clipPath: "inset(0% 100% 0% 0%)", x: -20 }, {
         clipPath: "inset(0% 0% 0% 0%)",
         x: 0,
@@ -129,7 +140,7 @@ export function initPageAnimations(root) {
 
     // --- Staggered groups: cards, rows, list items ---------------------------
     STAGGER_GROUPS.forEach((sel) => {
-      const items = q(sel).filter((el) => !el.closest(".hero-content"));
+      const items = q(sel);
       if (!items.length) return;
       gsap.set(items, { y: 46, opacity: 0 });
       ScrollTrigger.batch(items, {
@@ -206,18 +217,6 @@ export function initPageAnimations(root) {
         {
           y: -30, rotate: 3, ease: "none",
           scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true },
-        }
-      );
-    });
-
-    // Wave dividers swell as they pass through the viewport.
-    q(".wave").forEach((el) => {
-      gsap.fromTo(
-        el.querySelector(".wave-front"),
-        { scaleY: 0.35 },
-        {
-          scaleY: 1.15, ease: "none", transformOrigin: "50% 100%",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom 40%", scrub: true },
         }
       );
     });

@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9800;
-  background: var(--color-tangerine);
+  background: var(--pool);
   display: grid;
   place-items: center;
   visibility: hidden;
@@ -12,8 +12,9 @@
 .route-transition-label {
   font-family: var(--font-display);
   font-size: clamp(44px, 10vw, 150px);
-  letter-spacing: -0.04em;
-  color: var(--color-ink);
+  color: #fff;
+  -webkit-text-stroke: clamp(4px, 0.6vw, 9px) var(--deep);
+  paint-order: stroke fill;
   text-align: center;
   padding: 0 var(--gutter);
 }

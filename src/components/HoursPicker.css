@@ -1,0 +1,113 @@
+.hours-picker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.hours-day-btn {
+  position: relative;
+  border: 2.5px solid var(--deep);
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 0 13px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--deep);
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--deep);
+  transition: transform 0.35s var(--ease-bounce), background-color 0.2s, box-shadow 0.15s;
+}
+.hours-day-btn:hover {
+  transform: translateY(-3px);
+}
+.hours-day-btn.is-on {
+  background: var(--pool);
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--deep);
+}
+.hours-day-today {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-4deg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--lilo);
+  color: var(--deep);
+  border: 2px solid var(--deep);
+  border-radius: 8px;
+  padding: 1px 6px;
+}
+
+.hours-picker-panel {
+  margin-top: 22px;
+  animation: hours-in 0.5s var(--ease-bounce) both;
+}
+@keyframes hours-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+}
+
+.hours-picker-day {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.hours-picker-time {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 6.2vw, 92px);
+  line-height: 0.95;
+  margin-top: 6px;
+  color: var(--deep);
+}
+.hours-picker-time--closed {
+  color: var(--lilo-press);
+}
+.hours-picker-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.hours-picker-notes span {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  background: var(--lemon);
+  border: 2px solid var(--deep);
+  border-radius: 10px;
+  padding: 4px 10px;
+}
+.hours-picker-note {
+  margin-top: 12px;
+  font-weight: 600;
+}
+.hours-picker-holidays {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px dashed var(--line);
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 520px) {
+  .hours-picker-days {
+    gap: 4px;
+  }
+  .hours-day-btn {
+    font-size: 13px;
+    border-radius: 12px;
+    padding: 10px 0 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hours-picker-panel {
+    animation: none;
+  }
+}

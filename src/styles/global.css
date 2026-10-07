@@ -1,4 +1,5 @@
 @import "./tokens.css";
+@import "./sections.css";
 
 *,
 *::before,
@@ -12,11 +13,12 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-cream);
-  color: var(--color-ink);
+  background: var(--foam);
+  color: var(--deep);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: var(--step-body);
+  font-variation-settings: "opsz" 18;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -48,72 +50,89 @@ p {
   padding-right: var(--gutter);
 }
 
-/* Section eyebrow — small tracked mono label used above most headings */
+/* --------------------------------------------------------------------------
+   Pool signage — every section label is styled like the painted tiles on a
+   pool wall ("DEEP END", "NO DIVING"): white mono caps on a deep-blue tile.
+   -------------------------------------------------------------------------- */
 .eyebrow {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: clamp(11px, 1vw, 13px);
-  letter-spacing: 0.2em;
-  color: var(--color-brown-muted-2);
-  text-transform: none;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--foam);
+  background: var(--deep);
+  padding: 7px 12px 6px;
+  border-radius: 8px;
+  line-height: 1.2;
 }
 
+/* On deep sections the sign flips to a lemon tile */
 .eyebrow--on-dark {
-  color: var(--color-teal-pale);
+  color: var(--deep);
+  background: var(--lemon);
 }
 
+/* Kept for markup compatibility: both now render as the standard sign */
+.eyebrow--badge,
 .eyebrow--plain-accent {
-  display: block;
-  color: var(--color-yellow);
-  letter-spacing: 0.22em;
-  margin-bottom: 22px;
-}
-
-.eyebrow--badge {
-  display: inline-block;
-  color: var(--color-ink);
-  background: var(--color-yellow);
-  padding: 7px 13px;
-  letter-spacing: 0.18em;
   margin-bottom: 20px;
 }
 
-/* Display headline helper: tight leading/tracking, used across every hero
-   and section title so the "genuinely large" rule stays consistent. */
 .headline {
   font-family: var(--font-display);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  color: var(--color-pine);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: var(--deep);
   margin: 0;
+  text-wrap: balance;
 }
 
 .headline--ink {
-  color: var(--color-ink);
+  color: var(--deep);
 }
 
 .headline--cream {
-  color: var(--color-cream);
+  color: var(--foam);
 }
 
-/* Underlined text link — "Our story →", "All photos →" etc. */
+/* Text link with a lemon highlighter swipe */
 .text-link {
   display: inline-block;
   font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-pine);
+  font-size: 17px;
+  color: var(--deep);
   text-decoration: none;
-  border-bottom: 3px solid var(--color-tangerine);
-  padding-bottom: 5px;
+  padding: 2px 4px;
+  margin-left: -4px;
+  background: linear-gradient(var(--lemon), var(--lemon)) 0 88% / 100% 0.42em no-repeat;
+  transition: background-size 0.4s var(--ease);
 }
 .text-link:hover {
-  color: var(--color-tangerine);
+  background-size: 100% 100%;
 }
 
-/* Screen-reader-only utility, for skip links / labels that shouldn't show */
+/* Pool-floor tiles: a reusable background for pool-blue sections */
+.tiles {
+  background-color: var(--pool);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.22) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 2px, transparent 2px);
+  background-size: 44px 44px;
+}
+
+.tiles--deep {
+  background-color: var(--deep);
+  background-image:
+    linear-gradient(rgba(143, 224, 247, 0.08) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(143, 224, 247, 0.08) 2px, transparent 2px);
+  background-size: 44px 44px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -130,10 +149,10 @@ p {
   position: absolute;
   left: 16px;
   top: -60px;
-  background: var(--color-yellow);
-  color: var(--color-ink);
+  background: var(--lemon);
+  color: var(--deep);
   padding: 10px 16px;
-  border-radius: 6px;
+  border-radius: 12px;
   font-weight: 700;
   z-index: 1000;
   transition: top 0.15s var(--ease);
@@ -144,8 +163,14 @@ p {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-teal);
-  outline-offset: 2px;
+  outline: 3px solid var(--lilo);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--lemon);
+  color: var(--deep);
 }
 
 /* ==========================================================================
@@ -170,169 +195,31 @@ html.lenis body {
   pointer-events: auto;
 }
 
-::selection {
-  background: var(--color-yellow);
-  color: var(--color-ink);
+html.is-scroll-locked {
+  overflow: hidden;
 }
 
 /* SplitText: each word is a clipping mask its characters rise through.
-   Padding + matching negative margin gives tall display glyphs room inside
-   the mask without changing the headline's line spacing. */
+   Padding + matching negative margin gives the round display glyphs room
+   inside the mask without changing line spacing. */
 .split-word {
   display: inline-block;
   overflow: clip;
-  padding: 0.14em 0.03em 0.12em;
-  margin: -0.14em -0.03em -0.12em;
+  padding: 0.16em 0.04em 0.14em;
+  margin: -0.16em -0.04em -0.14em;
   vertical-align: top;
 }
 .split-word-inner,
 .split-char {
   display: inline-block;
 }
-.split-char {
-  will-change: transform;
-}
 
-/* Film grain across the whole site — the analogue texture that ties the
-   WebGL scenes to the flat colour blocks. */
-.site-grain {
+/* Bubbles that trail the pointer over pool-blue areas (MotionLayer.jsx) */
+.bubble-trail {
   position: fixed;
-  inset: -50%;
-  z-index: 9000;
+  z-index: 9400;
   pointer-events: none;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
-  animation: grain 0.9s steps(6) infinite;
-}
-@keyframes grain {
-  0% { transform: translate(0, 0); }
-  20% { transform: translate(-4%, 3%); }
-  40% { transform: translate(3%, -5%); }
-  60% { transform: translate(-2%, 6%); }
-  80% { transform: translate(5%, -2%); }
-  100% { transform: translate(-3%, 1%); }
-}
-
-/* Scroll progress rail */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  z-index: 200;
-  transform-origin: 0 50%;
-  transform: scaleX(0);
-  background: linear-gradient(90deg, var(--color-yellow), var(--color-tangerine));
-  pointer-events: none;
-}
-
-/* Spotlight + tilt for cards (driven by components/Pointer.jsx) */
-.rate-table,
-.wr-card,
-.wr-extra,
-.wp-rules-card,
-.parties-rules-card {
-  position: relative;
-  transition: box-shadow 0.5s var(--ease);
-}
-.rate-table::after,
-.wr-card::after,
-.wr-extra::after,
-.wp-rules-card::after,
-.parties-rules-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s var(--ease);
-  background: radial-gradient(
-    420px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(245, 197, 68, 0.28),
-    transparent 60%
-  );
-  mix-blend-mode: soft-light;
-}
-.is-tilting::after {
-  opacity: 1;
-}
-.rate-table.is-tilting,
-.wr-card.is-tilting,
-.wp-rules-card.is-tilting,
-.parties-rules-card.is-tilting {
-  box-shadow: 10px 14px 0 var(--color-ink);
-}
-.wr-extra.is-tilting {
-  box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.35);
-}
-
-/* Custom cursor follower (fine pointers only; native cursor stays visible) */
-.cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9500;
-  pointer-events: none;
-  display: none;
-}
-@media (hover: hover) and (pointer: fine) {
-  .cursor {
-    display: block;
-  }
-}
-.cursor-ring {
-  position: absolute;
-  width: 38px;
-  height: 38px;
-  margin: -19px 0 0 -19px;
   border-radius: 50%;
-  border: 2px solid var(--color-tangerine);
-  display: grid;
-  place-items: center;
-  transition: width 0.35s var(--ease), height 0.35s var(--ease), margin 0.35s var(--ease),
-    background-color 0.35s var(--ease), border-color 0.35s var(--ease), opacity 0.3s;
-}
-.cursor-label {
-  font-family: var(--font-display);
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  color: var(--color-ink);
-  opacity: 0;
-  transform: scale(0.6);
-  transition: opacity 0.25s, transform 0.35s var(--ease);
-}
-.cursor.is-link .cursor-ring {
-  width: 64px;
-  height: 64px;
-  margin: -32px 0 0 -32px;
-  background: rgba(245, 197, 68, 0.25);
-  border-color: var(--color-yellow);
-}
-.cursor.is-view .cursor-ring {
-  width: 96px;
-  height: 96px;
-  margin: -48px 0 0 -48px;
-  background: var(--color-yellow);
-  border-color: var(--color-yellow);
-}
-.cursor.is-view .cursor-label {
-  opacity: 1;
-  transform: scale(1);
-}
-.cursor.is-hidden .cursor-ring {
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .site-grain {
-    animation: none;
-  }
-  .cursor {
-    display: none !important;
-  }
-}
-
-html.is-scroll-locked {
-  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9) 0 18%, rgba(255, 255, 255, 0.12) 40%, transparent 70%);
 }

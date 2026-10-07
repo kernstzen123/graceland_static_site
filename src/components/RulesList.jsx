@@ -1,16 +1,20 @@
 import "./RulesList.css";
 
-const ICON = { yes: "✔", no: "✕", warn: "!" };
+const ICON = { yes: "✓", no: "✕", warn: "!" };
+const LABEL = { yes: "Allowed", no: "Not allowed", warn: "Please note" };
 
+/** Rules as round pool-side signs: green go, red no, yellow heads-up. */
 export default function RulesList({ rules }) {
   return (
-    <div className="rules-list">
+    <ul className="rules-list">
       {rules.map((rule, i) => (
-        <div className="rules-row" key={i}>
-          <div className={`rules-icon rules-icon--${rule.tone}`}>{ICON[rule.tone]}</div>
-          <div>{rule.text}</div>
-        </div>
+        <li className="rules-row" key={i}>
+          <span className={`rules-icon rules-icon--${rule.tone}`} role="img" aria-label={LABEL[rule.tone]}>
+            {ICON[rule.tone]}
+          </span>
+          <span>{rule.text}</span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

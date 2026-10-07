@@ -1,173 +1,96 @@
+/* Inflatable buttons: chunky outline, a hard "float" shadow, a jelly wobble
+   on hover and a squish when pressed. */
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border: none;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--deep);
+  background: var(--lilo);
+  border: 2.5px solid var(--deep);
   border-radius: var(--radius-pill);
+  box-shadow: 0 6px 0 var(--deep);
+  padding: 15px 26px 16px;
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform 0.08s var(--ease), box-shadow 0.08s var(--ease),
-    background-color 0.15s var(--ease);
-  transform: translateY(0);
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background-color 0.2s var(--ease);
 }
 
-/* ---- Primary / Book Now — the loudest element on every screen ---- */
-.btn-primary {
-  font-family: var(--font-display);
-  color: var(--color-ink);
-  background: var(--color-tangerine);
-  box-shadow: 0 6px 0 var(--color-tangerine-shadow);
-  padding: 16px 28px;
-  font-size: 18px;
+.btn:hover {
+  animation: btn-jelly 0.6s var(--ease) both;
 }
-.btn-primary:hover {
-  background: #ef7638;
-}
-.btn-primary:active,
-.btn-primary.is-pressed {
-  background: var(--color-tangerine-press);
-  box-shadow: 0 1px 0 var(--color-tangerine-shadow);
-  transform: translateY(5px);
+.btn:active {
+  animation: none;
+  transform: translateY(5px) scale(0.97, 0.94);
+  box-shadow: 0 1px 0 var(--deep);
 }
 
-/* Book Now specifically renders on the yellow chip when it sits on dark/teal
-   surfaces (nav, footer, mobile sticky pill) so it stays legible + distinct
-   from the generic primary CTA colour used in-page. */
+@keyframes btn-jelly {
+  0% { transform: scale(1, 1); }
+  30% { transform: scale(1.08, 0.92); }
+  45% { transform: scale(0.95, 1.06); }
+  65% { transform: scale(1.03, 0.98); }
+  100% { transform: scale(1, 1) translateY(-2px); }
+}
+
+.btn-primary,
 .btn-booknow {
-  font-family: var(--font-display);
-  color: var(--color-ink);
-  background: var(--color-yellow);
-  box-shadow: 0 6px 0 var(--color-yellow-shadow);
+  background: var(--lilo);
 }
+.btn-primary:hover,
 .btn-booknow:hover {
-  background: #f7cf63;
-}
-.btn-booknow:active,
-.btn-booknow.is-pressed {
-  background: #dba62c;
-  box-shadow: 0 1px 0 var(--color-yellow-shadow);
-  transform: translateY(5px);
+  background: #ff7aa0;
 }
 
-/* ---- Secondary ---- */
 .btn-secondary {
-  font-family: var(--font-display);
-  color: var(--color-pine);
-  background: var(--color-teal);
-  box-shadow: 0 6px 0 var(--color-teal-press);
-  padding: 16px 28px;
-  font-size: 18px;
+  background: var(--lemon);
 }
 .btn-secondary:hover {
-  color: var(--color-cream);
-  background: var(--color-teal-press);
-  box-shadow: 0 6px 0 var(--color-teal-shadow);
-}
-.btn-secondary:active,
-.btn-secondary.is-pressed {
-  color: var(--color-cream);
-  background: var(--color-teal-press);
-  box-shadow: 0 1px 0 var(--color-teal-shadow);
-  transform: translateY(5px);
+  background: #fff07f;
 }
 
-/* ---- Ghost — outline, used for lower-emphasis links like "Rates" ---- */
 .btn-ghost {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-pine);
-  background: transparent;
-  border: 3px solid var(--color-pine);
-  padding: 15px 28px;
+  font-size: 18px;
+  background: #fff;
 }
 .btn-ghost:hover {
-  color: var(--color-cream);
-  background: var(--color-pine);
-}
-.btn-ghost:active,
-.btn-ghost.is-pressed {
-  background: var(--color-pine-press);
-  border-color: var(--color-pine-press);
-  color: var(--color-cream);
-  transform: translateY(3px);
+  background: var(--pool-light);
 }
 
 /* ---- Sizes ---- */
+.btn-sm {
+  font-size: 16px;
+  padding: 11px 18px 12px;
+  box-shadow: 0 4px 0 var(--deep);
+}
 .btn-lg {
-  padding: 22px 38px;
-  font-size: 24px;
+  font-size: 23px;
+  padding: 19px 32px 20px;
 }
 .btn-hero {
-  padding: 24px 44px;
-  font-size: 26px;
-}
-.btn-sm {
-  padding: 12px 22px;
-  font-size: 17px;
+  font-size: clamp(22px, 2.4vw, 30px);
+  padding: 22px 40px 24px;
+  box-shadow: 0 8px 0 var(--deep);
 }
 
 @media (max-width: 720px) {
   .btn-lg,
   .btn-hero {
-    padding: 18px 30px;
-    font-size: 20px;
+    font-size: 21px;
+    padding: 17px 28px 18px;
   }
 }
 
-/* --- Makeover: shine sweep, rolling arrow, magnetic offset ------------------
-   Magnetic pull uses the independent `translate` property (set from
-   components/Pointer.jsx) so it composes with the press `transform`. */
-.btn {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform 0.08s var(--ease), box-shadow 0.08s var(--ease),
-    background-color 0.15s var(--ease), color 0.15s var(--ease),
-    translate 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.4);
-}
-
-.btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -60%;
-  width: 45%;
-  z-index: -1;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  transform: skewX(-20deg) translateX(0);
-  pointer-events: none;
-}
-.btn:hover::before {
-  animation: btn-shine 0.85s var(--ease);
-}
-@keyframes btn-shine {
-  to {
-    transform: skewX(-20deg) translateX(420%);
-  }
-}
-
-/* Book Now breathes a little so it stays the loudest thing on screen */
-.btn-booknow.btn-lg,
-.btn-booknow.btn-hero,
-.btn-primary.btn-lg {
-  animation: btn-breathe 3.2s ease-in-out infinite;
-}
-@keyframes btn-breathe {
-  0%,
-  100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.08) saturate(1.1);
-  }
-}
-
+/* Arrow that swims off and back in on hover */
 .btn-arrow {
   position: relative;
   display: inline-block;
@@ -193,8 +116,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn,
-  .btn::before {
-    animation: none !important;
+  .btn:hover {
+    animation: none;
   }
 }

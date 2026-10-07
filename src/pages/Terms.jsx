@@ -1,6 +1,7 @@
 import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import LaneRope from "../components/LaneRope";
 import "./Legal.css";
 
 export default function Terms() {
@@ -8,10 +9,15 @@ export default function Terms() {
     <main id="main" className="legal-page">
       <Nav variant="teal" />
       
-      <div className="legal-header container">
-        <span className="eyebrow">— THE RULES OF PLAY</span>
-        <SplitText as="h1" className="headline legal-title">TERMS & CONDITIONS</SplitText>
+      <div className="page-title tiles">
+        <div className="container">
+          <span className="eyebrow">The rules of play</span>
+          <SplitText as="h1" className="headline page-title-text legal-title" split="hero">
+            Terms &amp; conditions
+          </SplitText>
+        </div>
       </div>
+      <LaneRope top="var(--pool)" bottom="var(--foam)" />
 
       <div className="legal-content container">
         <span className="legal-meta">Last Updated: September 9, 2026</span>

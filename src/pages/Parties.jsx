@@ -1,11 +1,11 @@
-import LiquidBackdrop from "../components/LiquidBackdrop";
-import SplitText from "../components/SplitText";
 import Hero from "../components/Hero";
-import WaveDivider from "../components/WaveDivider";
+import LaneRope from "../components/LaneRope";
 import RateTable from "../components/RateTable";
 import HoursList from "../components/HoursList";
 import RulesList from "../components/RulesList";
 import BookNowButton from "../components/BookNowButton";
+import ClosingPool from "../components/ClosingPool";
+import SplitText from "../components/SplitText";
 import Footer from "../components/Footer";
 import {
   partyPackages,
@@ -23,79 +23,79 @@ export default function Parties() {
     <main id="main">
       <Hero
         image="/assets/park.jpg"
-        imageAlt="Kids at Graceland Venues"
-        imageFilter="saturate(1.2) sepia(0.1)"
-        gradient="linear-gradient(180deg, rgba(233,96,31,0.7) 0%, rgba(233,96,31,0.2) 45%, rgba(42,18,6,0.60) 100%)"
-        navVariant="pine"
-        eyebrow="CELEBRATE WITH US"
+        imageAlt="Kids at a party at Graceland"
+        eyebrow="Kids' parties · ages 1–17"
         title={
           <>
-            KIDDIES
+            Party
             <br />
-            PARTIES
+            in the pool
           </>
         }
-        waveAmplitude="mid"
+        sticker="From R200 a child"
       >
+        <p className="hero-body">
+          Two-hour party slots with the slides, the pools, the play villages and your own party hut. You bring the
+          cake.
+        </p>
         <div className="hero-meta">
           <BookNowButton size="lg" />
-          <div className="hero-meta-text">Ages 1–17 · From R200 per child</div>
         </div>
       </Hero>
 
-      <div className="parties-intro container">
-        <span className="eyebrow">— WHAT'S INCLUDED</span>
-        <SplitText as="h2" className="headline parties-intro-title">THE PARTY EXPERIENCE</SplitText>
+      <section className="sec container" aria-labelledby="includes-title">
+        <div className="section-head">
+          <span className="eyebrow">What's included</span>
+          <SplitText as="h2" className="headline section-title" id="includes-title">
+            Every party gets
+          </SplitText>
+        </div>
         <ul className="parties-includes-list">
           {partyIncludes.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
         </ul>
-      </div>
+      </section>
 
-      <div className="parties-rates has-liquid">
-        <LiquidBackdrop palette="pine" bubbles={false} />
-        <div className="parties-rates-heading">
-          <span className="eyebrow eyebrow--on-dark">— WHAT IT COSTS</span>
-          <SplitText as="h2" className="headline parties-rates-title">PACKAGES</SplitText>
+      <LaneRope top="var(--foam)" bottom="var(--deep)" />
+      <section className="deep-band tiles--deep" aria-labelledby="packages-title">
+        <div className="container">
+          <div className="section-head section-head--center">
+            <span className="eyebrow eyebrow--on-dark">What it costs</span>
+            <SplitText as="h2" className="headline section-title" id="packages-title">
+              Packages
+            </SplitText>
+          </div>
+          <div className="ticket-grid">
+            <RateTable {...partyPackages} headTone="teal" />
+            <RateTable {...partyAddons} headTone="tan" />
+            <RateTable {...seatingOptions} headTone="yellow" />
+          </div>
         </div>
-        <div className="parties-rates-grid">
-          <RateTable {...partyPackages} headTone="teal" />
-          <RateTable {...partyAddons} headTone="tan" />
-          <RateTable {...seatingOptions} headTone="yellow" />
-        </div>
-      </div>
+      </section>
+      <LaneRope top="var(--deep)" bottom="var(--foam)" />
 
-      <WaveDivider amplitude="mid" fill="#fbf3e2" bg="#123b3f" />
-
-      <div className="parties-times-rules container">
+      <section className="sec container two-col" aria-label="Party slots and rules">
         <div>
-          <SplitText as="h2" className="headline parties-times-title">PARTY SLOTS</SplitText>
-          <span className="parties-subhead">CHOOSE YOUR TIME</span>
+          <SplitText as="h2" className="headline card-title">
+            Party slots
+          </SplitText>
+          <span className="subhead">Pick a two-hour slot</span>
           <HoursList rows={partyHours} closedNote={closedNote} />
           <p className="parties-note">
-            Please only arrive 10 minutes before and leave 10 minutes after your slot.
-            For parties longer than 2 hours, please book as a day visitor.
+            Please arrive no more than 10 minutes before your slot and leave within 10 minutes after it. Parties
+            longer than two hours book as day visitors.
           </p>
         </div>
-        <div className="parties-rules-card">
-          <SplitText as="h2" className="headline parties-times-title">CATERING & RULES</SplitText>
+        <div className="card card--lemon">
+          <SplitText as="h2" className="headline card-title">
+            Catering &amp; rules
+          </SplitText>
           <RulesList rules={partyRules} />
         </div>
-      </div>
+      </section>
 
-      <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="parties-closing has-liquid">
-        <LiquidBackdrop palette="tangerine" />
-        <SplitText as="h2" className="headline parties-closing-title">
-          BOOK YOUR
-          <br />
-          PARTY TODAY
-        </SplitText>
-        <div className="parties-closing-btn">
-          <BookNowButton size="hero" />
-        </div>
-      </div>
+      <ClosingPool title="Book the party" />
 
       <Footer variant="simple" />
     </main>

@@ -1,12 +1,13 @@
-import LiquidBackdrop from "../components/LiquidBackdrop";
-import SplitText from "../components/SplitText";
 import Hero from "../components/Hero";
-import WaveDivider from "../components/WaveDivider";
+import LaneRope from "../components/LaneRope";
 import AttractionRow from "../components/AttractionRow";
 import RateTable from "../components/RateTable";
 import HoursList from "../components/HoursList";
 import RulesList from "../components/RulesList";
 import BookNowButton from "../components/BookNowButton";
+import DayPlanner from "../components/DayPlanner";
+import ClosingPool from "../components/ClosingPool";
+import SplitText from "../components/SplitText";
 import Footer from "../components/Footer";
 import {
   attractions,
@@ -21,92 +22,98 @@ import {
 import "./WaterPark.css";
 
 export default function WaterPark() {
+  const from = (rates) => rates.rows.find((r) => r.label === "Children 3–17").price;
   return (
     <main id="main">
       <Hero
         image="/assets/waterslide.jpg"
-        imageAlt="Waterslide at Graceland"
-        imageFilter="saturate(0.9) sepia(0.1)"
-        gradient="linear-gradient(180deg, rgba(18,59,63,0.74) 0%, rgba(18,59,63,0.10) 45%, rgba(42,18,6,0.60) 100%)"
-        navVariant="pine"
-        eyebrow="THE WATER PARK"
+        imageAlt="The four waterslides at Graceland"
+        eyebrow="The water park"
         title={
           <>
-            FOUR SLIDES,
+            Four slides,
             <br />
-            THREE POOLS
+            three pools
           </>
         }
-        waveAmplitude="mid"
-        vars={{
-          "--hero-height": "720px",
-          "--hero-height-mobile": "520px",
-          "--hero-title-min": "42px",
-          "--hero-title-max": "132px",
-          "--hero-content-max": "1000px",
-          "--hero-content-bottom": "130px",
-          "--hero-content-bottom-mobile": "80px",
-        }}
+        sticker="Tuesday to Sunday"
       >
+        <p className="hero-body">
+          The waterslides, the rock, beach and bath pools, a toddler splash pad, and two dry play villages for when
+          fingers go wrinkly.
+        </p>
         <div className="hero-meta">
           <BookNowButton size="lg" />
-          <div className="hero-meta-text">Tue–Sun · from R90 dry, R200 wet</div>
+          <div className="hero-meta-text">
+            Kids from {from(ratesDry)} dry
+            <br />
+            <span>or {from(ratesWet)} with the water</span>
+          </div>
         </div>
       </Hero>
 
-      <div className="wp-attractions-heading container">
-        <span className="eyebrow">— WHAT'S IN THERE</span>
-        <SplitText as="h2" className="headline wp-attractions-title">THE ATTRACTIONS</SplitText>
-      </div>
-
-      <div style={{ marginTop: "48px" }}>
-        {attractions.map((a) => (
-          <AttractionRow key={a.number} {...a} />
-        ))}
-      </div>
-
-      <div className="wp-rates has-liquid">
-        <LiquidBackdrop palette="pine" bubbles={false} />
-        <div className="wp-rates-heading">
-          <span className="eyebrow eyebrow--on-dark">— WHAT IT COSTS</span>
-          <SplitText as="h2" className="headline wp-rates-title">RATES</SplitText>
+      <section className="sec container" aria-labelledby="attractions-title">
+        <div className="section-head">
+          <span className="eyebrow">What's in there</span>
+          <SplitText as="h2" className="headline section-title" id="attractions-title">
+            The attractions
+          </SplitText>
         </div>
-        <div className="wp-rates-grid">
-          <RateTable {...ratesWet} headTone="teal" />
-          <RateTable {...ratesDry} headTone="tan" />
-          <RateTable {...seatingOptions} headTone="yellow" />
+        <div className="wp-attractions">
+          {attractions.map((a) => (
+            <AttractionRow key={a.number} {...a} />
+          ))}
         </div>
-      </div>
-      <WaveDivider amplitude="mid" fill="#fbf3e2" bg="#123b3f" />
+      </section>
 
-      <div className="wp-times-rules container">
+      <LaneRope top="var(--foam)" bottom="var(--deep)" />
+      <section className="deep-band tiles--deep" aria-labelledby="rates-title">
+        <div className="container">
+          <div className="section-head section-head--center">
+            <span className="eyebrow eyebrow--on-dark">What it costs</span>
+            <SplitText as="h2" className="headline section-title" id="rates-title">
+              Gate prices
+            </SplitText>
+          </div>
+          <div className="ticket-grid">
+            <RateTable {...ratesWet} headTone="teal" />
+            <RateTable {...ratesDry} headTone="tan" />
+            <RateTable {...seatingOptions} headTone="yellow" />
+          </div>
+          <div className="wp-planner">
+            <div className="wp-planner-copy">
+              <SplitText as="h3" className="headline headline--cream wp-planner-title">
+                Add it up for your crew
+              </SplitText>
+              <p>Same prices as the tickets above, totalled for you.</p>
+            </div>
+            <DayPlanner />
+          </div>
+        </div>
+      </section>
+      <LaneRope top="var(--deep)" bottom="var(--foam)" />
+
+      <section className="sec container two-col" aria-label="Opening times and rules">
         <div>
-          <SplitText as="h2" className="headline wp-times-title">OPENING TIMES</SplitText>
-          <span className="wp-subhead">DAY VISITORS</span>
+          <SplitText as="h2" className="headline card-title">
+            Opening times
+          </SplitText>
+          <span className="subhead">Day visitors</span>
           <HoursList rows={dayVisitorHours} />
-          <span className="wp-subhead" id="parties">
-            PARTY SLOTS
+          <span className="subhead" id="parties">
+            Party slots
           </span>
           <HoursList rows={partyHours} closedNote={closedNote} />
         </div>
-        <div className="wp-rules-card">
-          <SplitText as="h2" className="headline wp-times-title">THE RULES</SplitText>
+        <div className="card card--lemon wp-rules-card">
+          <SplitText as="h2" className="headline card-title">
+            Pool rules
+          </SplitText>
           <RulesList rules={rules} />
         </div>
-      </div>
+      </section>
 
-      <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="wp-closing has-liquid">
-        <LiquidBackdrop palette="tangerine" />
-        <SplitText as="h2" className="headline wp-closing-title">
-          SEE YOU AT
-          <br />
-          THE SLIDES
-        </SplitText>
-        <div className="wp-closing-btn">
-          <BookNowButton size="hero" />
-        </div>
-      </div>
+      <ClosingPool title="See you at the slides" />
 
       <Footer variant="simple" />
     </main>
