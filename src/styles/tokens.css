@@ -1,39 +1,44 @@
 /* ==========================================================================
    Graceland Venues — design tokens
-   Direction 1a "Sun-bleached Poolside" (see design/Graceland Screens.dc.html)
+   Direction: "Pool day". The site is the swimming pool: pool-floor tiles,
+   lane ropes, pool signage, inflatables. Five colours, nothing else.
    ========================================================================== */
 :root {
   /* Palette */
-  --color-cream: #fbf3e2; /* page background */
-  --color-pine: #123b3f; /* dark teal — headers, dark sections, primary text-on-light */
-  --color-pine-press: #0c2a2d;
-  --color-ink: #2a1206; /* near-black brown — headline colour, deep text */
-  --color-tangerine: #e9601f; /* primary CTA */
-  --color-tangerine-press: #d8541a;
-  --color-tangerine-shadow: #a93f0f;
-  --color-yellow: #f5c544; /* accent / Book Now on dark */
-  --color-yellow-shadow: #c89416;
-  --color-teal: #2e9aa3; /* secondary accent */
-  --color-teal-press: #1e6e75;
-  --color-teal-shadow: #123b3f;
-  --color-teal-deep-text: #0e2f32;
-  --color-teal-pale: #9fc7c4; /* text on pine */
-  --color-tan: #e7d6b4; /* neutral card / band background */
-  --color-brown-muted: #5a4426; /* muted label text on light */
-  --color-brown-muted-2: #8a6b4a; /* eyebrow text on cream */
-  --color-line-on-ink: rgba(42, 18, 6, 0.2);
-  --color-line-on-cream: rgba(251, 243, 226, 0.3);
+  --foam: #f3fbff; /* page background: sunlit white water */
+  --pool: #27c1ee; /* chlorinated pool blue */
+  --pool-light: #8fe0f7; /* shallow end / tile grout */
+  --deep: #07305a; /* the deep end: text, dark sections */
+  --deep-2: #0c4478; /* lifted deep, cards on deep */
+  --lilo: #ff5c8a; /* pool-float pink: primary action */
+  --lilo-press: #e63f70;
+  --lemon: #ffe14d; /* sun / highlight */
+  --lemon-press: #f2c919;
+  --ink-soft: rgba(7, 48, 90, 0.7); /* secondary text on light */
+  --line: rgba(7, 48, 90, 0.14);
+  --line-on-deep: rgba(243, 251, 255, 0.18);
 
   /* Type */
-  --font-display: "Bowlby One", cursive;
-  --font-body: "Karla", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-display: "Bagel Fat One", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-body: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
 
-  /* Radii / motion */
+  --step-hero: clamp(64px, 12.5vw, 200px);
+  --step-1: clamp(42px, 6.4vw, 96px);
+  --step-2: clamp(30px, 3.8vw, 52px);
+  --step-3: clamp(22px, 2.2vw, 30px);
+  --step-body: clamp(17px, 1.35vw, 19px);
+
+  /* Shape & motion */
+  --radius-lg: 36px;
+  --radius-md: 22px;
   --radius-pill: 999px;
+  --shadow-float: 0 6px 0 var(--deep);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Layout */
-  --content-max: 1440px;
-  --gutter: clamp(20px, 5vw, 56px);
+  --content-max: 1360px;
+  --gutter: clamp(18px, 4.5vw, 56px);
+  --section-y: clamp(64px, 9vw, 128px);
 }

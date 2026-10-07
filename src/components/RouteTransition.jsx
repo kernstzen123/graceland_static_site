@@ -22,7 +22,7 @@ export default function RouteTransition() {
     prev.current = pathname;
     if (prefersReducedMotion() || !root.current) return;
     const name = EXTRA[pathname] || nav.find((n) => n.to === pathname)?.label || "Graceland";
-    label.current.textContent = name.toUpperCase();
+    label.current.textContent = name;
     gsap.set(root.current, { yPercent: 0, autoAlpha: 1 });
     // Start the lift once the new page has mounted and painted, so a heavy
     // first frame doesn't eat the animation.
@@ -41,7 +41,7 @@ export default function RouteTransition() {
     <div className="route-transition" ref={root} aria-hidden="true">
       <span className="route-transition-label" ref={label} />
       <svg className="route-transition-wave" viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,0 L1440,0 L1440,50 C1260,90 1080,96 900,58 C720,20 540,8 360,40 C180,72 60,64 0,46 Z" fill="#e9601f" />
+        <path d="M0,0 L1440,0 L1440,50 C1260,90 1080,96 900,58 C720,20 540,8 360,40 C180,72 60,64 0,46 Z" fill="#27c1ee" />
       </svg>
     </div>
   );

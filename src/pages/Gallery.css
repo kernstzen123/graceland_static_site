@@ -1,46 +1,82 @@
-.gallery-page {
-  background: var(--color-cream);
-  min-height: 100vh;
+.gallery-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
-.gallery-title-block {
-  padding-top: clamp(100px, 12vw, 160px);
-  padding-bottom: clamp(40px, 6vw, 80px);
+.gallery-hint {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-weight: 700;
+  background: #fff;
+  border: 2.5px solid var(--deep);
+  border-radius: var(--radius-pill);
+  padding: 6px 6px 6px 18px;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .gallery-hint {
+    display: inline-flex;
+  }
 }
 
-.gallery-page-title {
-  font-size: clamp(52px, 8vw, 120px);
-  color: var(--color-ink);
-  line-height: 0.9;
-  margin-top: 24px;
+.gallery-shuffle {
+  font-weight: 800;
+  border: 2.5px solid var(--deep);
+  background: var(--lemon);
+  color: var(--deep);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-bounce);
+}
+.gallery-shuffle:hover {
+  transform: rotate(-4deg) scale(1.05);
 }
 
-.gallery-page-grid {
+.gallery-deck {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
-  padding-bottom: clamp(60px, 8vw, 120px);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
 }
 
-.gallery-page-grid img {
+.deck-snap {
+  position: relative;
+  margin: 0;
+  background: #fff;
+  border: 2.5px solid var(--deep);
+  border-radius: 20px;
+  padding: 10px 10px 0;
+  box-shadow: 0 8px 0 var(--deep);
+  user-select: none;
+  touch-action: auto;
+}
+@media (hover: hover) and (pointer: fine) {
+  .deck-snap {
+    cursor: grab;
+  }
+  .deck-snap.is-held {
+    cursor: grabbing;
+    box-shadow: 0 26px 40px rgba(7, 48, 90, 0.35);
+  }
+}
+
+.deck-snap img {
   width: 100%;
-  height: 280px;
+  height: 240px;
   object-fit: cover;
-  border: 3px solid var(--color-ink);
+  border-radius: 12px;
+  pointer-events: none;
 }
 
-.gallery-closing {
-  padding: 16px var(--gutter) clamp(56px, 8vw, 88px);
-  background: var(--color-tangerine);
-  text-align: center;
-}
-
-.gallery-closing-title {
-  font-size: clamp(46px, 8vw, 112px);
-  color: var(--color-ink);
-  line-height: 0.84;
-}
-
-.gallery-closing-btn {
-  margin-top: 32px;
+.deck-snap figcaption {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 10px 4px 12px;
 }

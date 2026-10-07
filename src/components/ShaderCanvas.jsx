@@ -3,9 +3,8 @@ import { introDone, prefersReducedMotion } from "../lib/motion";
 import "./ShaderCanvas.css";
 
 /**
- * Lightweight raw-WebGL canvas (no three.js) for the Unicorn-Studio-style
- * effects: a liquid "water" distortion over a photo (heroes) and a slow
- * domain-warped liquid gradient (stats band, closing CTAs).
+ * Lightweight raw-WebGL canvas (no three.js): a liquid "water" distortion
+ * over a hero photo that ripples under the cursor and warps on scroll.
  *
  * Purely decorative: it sits over/behind real content, renders nothing if
  * WebGL is unavailable, freezes on a single frame for reduced motion, and
@@ -90,37 +89,9 @@ void main() {
   col += 0.07 * uHover * exp(-dist * 4.0) * vec3(1.0, 0.88, 0.66);
 
   col += (hash(vUv * uRes + fract(t) * 91.0) - 0.5) * 0.045;
-  col = mix(vec3(0.071, 0.231, 0.247), col, smoothstep(0.0, 0.35, uReveal));
+  col = mix(vec3(0.027, 0.188, 0.353), col, smoothstep(0.0, 0.35, uReveal));
   gl_FragColor = vec4(col, 1.0);
 }`;
-
-const LIQUID_FRAG = `${COMMON}
-uniform vec3 uC1;
-uniform vec3 uC2;
-uniform vec3 uC3;
-
-void main() {
-  vec2 asp = vec2(uRes.x / uRes.y, 1.0);
-  vec2 p = vUv * asp * 1.25;
-  float t = uTime * 0.6;
-  vec2 m = (uMouse - 0.5) * asp * 0.35 * uHover;
-  vec2 q = vec2(fbm(p + t * 0.05 + m), fbm(p + vec2(5.2, 1.3) - t * 0.04));
-  vec2 r = vec2(fbm(p + 3.6 * q + vec2(1.7, 9.2) + t * 0.07),
-                fbm(p + 3.6 * q + vec2(8.3, 2.8) - t * 0.05));
-  float f = fbm(p + 3.6 * r);
-  f += 0.18 * uHover * exp(-length((vUv - uMouse) * asp) * 3.5);
-
-  vec3 col = mix(uC1, uC2, smoothstep(0.25, 0.75, f));
-  col = mix(col, uC3, smoothstep(0.62, 1.05, f * (0.6 + length(q))));
-  // soft ordered grain, the dithered "print" texture unicorn.studio scenes have
-  col += (hash(floor(vUv * uRes / 2.0) + fract(t) * 13.0) - 0.5) * 0.035;
-  gl_FragColor = vec4(col, 1.0);
-}`;
-
-function hexToVec3(hex) {
-  const n = parseInt(hex.replace("#", ""), 16);
-  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
-}
 
 function compile(gl, type, src) {
   const s = gl.createShader(type);
@@ -134,9 +105,8 @@ function compile(gl, type, src) {
 }
 
 export default function ShaderCanvas({
-  variant = "liquid",
+  variant = "water",
   image,
-  colors = ["#123b3f", "#1b4e52", "#2e9aa3"],
   className = "",
   style,
 }) {
@@ -149,7 +119,7 @@ export default function ShaderCanvas({
     if (!gl) return;
 
     const vs = compile(gl, gl.VERTEX_SHADER, VERT);
-    const fs = compile(gl, gl.FRAGMENT_SHADER, variant === "water" ? WATER_FRAG : LIQUID_FRAG);
+    const fs = compile(gl, gl.FRAGMENT_SHADER, WATER_FRAG);
     if (!vs || !fs) return;
     const prog = gl.createProgram();
     gl.attachShader(prog, vs);
@@ -167,13 +137,6 @@ export default function ShaderCanvas({
     const u = (name) => gl.getUniformLocation(prog, name);
     const uRes = u("uRes"), uTime = u("uTime"), uMouse = u("uMouse"), uHover = u("uHover");
     const uScroll = u("uScroll"), uReveal = u("uReveal"), uImg = u("uImg");
-
-    if (variant !== "water") {
-      const [c1, c2, c3] = colors.map(hexToVec3);
-      gl.uniform3fv(u("uC1"), c1);
-      gl.uniform3fv(u("uC2"), c2);
-      gl.uniform3fv(u("uC3"), c3);
-    }
 
     const reduced = prefersReducedMotion();
     const host = canvas.parentElement;
@@ -295,9 +258,7 @@ export default function ShaderCanvas({
       gl.deleteShader(fs);
       gl.deleteBuffer(buf);
     };
-    // colors is a literal array per call site; stringify to keep the effect stable
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [variant, image, colors.join(",")]);
+  }, [variant, image]);
 
   return <canvas ref={ref} className={`shader-canvas ${className}`} style={style} aria-hidden="true" />;
 }

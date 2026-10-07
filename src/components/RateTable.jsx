@@ -5,7 +5,7 @@ export default function RateTable({ title, subtitle, rows, headTone = "teal" }) 
   return (
     <div className="rate-table">
       <div className={`rate-table-head rate-table-head--${headTone}`}>
-        <div className="rate-table-title">{title.toUpperCase()}</div>
+        <div className="rate-table-title">{title}</div>
         <div className="rate-table-subtitle">{subtitle}</div>
       </div>
       <div className="rate-table-rows">

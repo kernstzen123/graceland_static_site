@@ -1,6 +1,7 @@
 import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import LaneRope from "../components/LaneRope";
 import "./Legal.css";
 
 export default function PrivacyPolicy() {
@@ -8,10 +9,15 @@ export default function PrivacyPolicy() {
     <main id="main" className="legal-page">
       <Nav variant="teal" />
       
-      <div className="legal-header container">
-        <span className="eyebrow">— THE BORING BUT IMPORTANT STUFF</span>
-        <SplitText as="h1" className="headline legal-title">PRIVACY POLICY</SplitText>
+      <div className="page-title tiles">
+        <div className="container">
+          <span className="eyebrow">The boring but important stuff</span>
+          <SplitText as="h1" className="headline page-title-text legal-title" split="hero">
+            Privacy policy
+          </SplitText>
+        </div>
       </div>
+      <LaneRope top="var(--pool)" bottom="var(--foam)" />
 
       <div className="legal-content container">
         <span className="legal-meta">Last Updated: September 9, 2026</span>

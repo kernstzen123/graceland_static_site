@@ -1,188 +1,128 @@
 .nav {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 14px;
   left: 0;
   right: 0;
-  z-index: 40;
-  transition: background-color 0.2s var(--ease), box-shadow 0.2s var(--ease),
-    border-color 0.2s var(--ease);
+  z-index: 50;
+  padding: 0 var(--gutter);
+  pointer-events: none;
+  transition: transform 0.55s cubic-bezier(0.7, 0, 0.2, 1);
+}
+.nav--hidden {
+  transform: translateY(calc(-100% - 24px));
 }
 
 .nav-inner {
+  pointer-events: auto;
+  max-width: var(--content-max);
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-top: 22px;
-  padding-bottom: 22px;
+  gap: 18px;
+  padding: 8px 8px 8px 18px;
+  background: rgba(243, 251, 255, 0.86);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  backdrop-filter: blur(14px) saturate(1.5);
+  border: 2.5px solid var(--deep);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 5px 0 var(--deep);
+  transition: box-shadow 0.3s var(--ease);
+}
+.nav--scrolled .nav-inner {
+  box-shadow: 0 5px 0 var(--deep), 0 18px 40px rgba(7, 48, 90, 0.18);
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-display);
-  font-size: clamp(19px, 1.6vw, 24px);
-  color: var(--color-cream);
+  font-size: clamp(20px, 1.8vw, 25px);
+  color: var(--deep);
   text-decoration: none;
-  letter-spacing: 0;
+  margin-right: auto;
+}
+
+/* Swim ring mark: a striped donut that spins when you hover the logo */
+.nav-logo-ring {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(var(--lilo) 0 45deg, #fff 45deg 90deg);
+  border: 2.5px solid var(--deep);
+  -webkit-mask: radial-gradient(circle, transparent 5px, #000 5.5px);
+  mask: radial-gradient(circle, transparent 5px, #000 5.5px);
+  transition: transform 0.8s var(--ease-bounce);
+}
+.nav-logo:hover .nav-logo-ring {
+  transform: rotate(270deg);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 4px;
 }
 
 .nav-link {
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--color-cream);
+  font-weight: 650;
+  font-size: 16px;
+  color: var(--deep);
   text-decoration: none;
-  padding-bottom: 3px;
-  border-bottom: 3px solid transparent;
+  padding: 9px 15px;
+  border-radius: var(--radius-pill);
+  transition: background-color 0.25s var(--ease), transform 0.35s var(--ease-bounce);
 }
-
+.nav-link:hover {
+  background: rgba(39, 193, 238, 0.18);
+  transform: translateY(-2px);
+}
 .nav-link.is-active {
-  border-bottom-color: var(--color-yellow);
+  background: var(--lemon);
 }
 
 .nav-burger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
-  width: 30px;
-  background: none;
-  border: none;
-  padding: 8px 0;
+  width: 46px;
+  height: 46px;
+  padding: 0 11px;
+  border-radius: 50%;
+  border: 2.5px solid var(--deep);
+  background: var(--lemon);
   cursor: pointer;
 }
-
 .nav-burger span {
-  height: 4px;
-  background: var(--color-yellow);
-  border-radius: 1px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--deep);
 }
 
-/* --- Variants --- */
-
-/* Transparent: sits over a hero image, cream text, no background */
-.nav--transparent {
-  background: transparent;
-  border-bottom: 3px solid transparent;
+.nav-spacer {
+  height: 96px;
 }
 
-/* Solid: pine background — either a permanently-solid page nav (Water Park)
-   or the scrolled state of a transparent nav (Home / Weddings) */
-.nav--solid {
-  position: fixed;
-  background: var(--color-pine);
-  border-bottom: 3px solid var(--color-ink);
-  box-shadow: 0 8px 0 rgba(42, 18, 6, 0.18);
-}
-.nav--solid .nav-inner {
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-
-/* Teal: Visit page, no hero — dark text on teal */
-.nav--teal {
-  position: sticky;
-  background: var(--color-teal);
-  border-bottom: 3px solid var(--color-ink);
-}
-.nav--teal .nav-inner {
-  padding-top: 14px;
-  padding-bottom: 14px;
-}
-.nav--teal .nav-logo,
-.nav--teal .nav-link {
-  color: var(--color-pine);
-}
-.nav--teal .nav-burger span {
-  background: var(--color-pine);
-}
-
-@media (max-width: 900px) {
-  .nav-links {
+@media (max-width: 960px) {
+  .nav-links,
+  .nav-cta {
     display: none;
   }
   .nav-burger {
     display: flex;
   }
   .nav-inner {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding: 6px 6px 6px 16px;
+  }
+  .nav-spacer {
+    height: 84px;
   }
 }
 
-/* --- Makeover: glass, hide-on-scroll, animated underline ------------------ */
-.nav {
-  transition: background-color 0.35s var(--ease), box-shadow 0.35s var(--ease),
-    border-color 0.35s var(--ease), transform 0.55s cubic-bezier(0.7, 0, 0.2, 1);
-}
-.nav--hidden {
-  transform: translateY(-110%);
-}
-.nav--solid {
-  background: rgba(18, 59, 63, 0.82);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  backdrop-filter: blur(14px) saturate(1.4);
-}
-.nav--teal {
-  background: rgba(46, 154, 163, 0.88);
-  -webkit-backdrop-filter: blur(14px) saturate(1.3);
-  backdrop-filter: blur(14px) saturate(1.3);
-}
-
-.nav-logo {
-  display: inline-flex;
-  transition: letter-spacing 0.5s var(--ease), color 0.3s;
-}
-.nav-logo:hover {
-  letter-spacing: 0.06em;
-  color: var(--color-yellow);
-}
-.nav--teal .nav-logo:hover {
-  color: var(--color-cream);
-}
-
-.nav-link {
-  position: relative;
-  border-bottom-color: transparent !important;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -3px;
-  height: 3px;
-  background: var(--color-yellow);
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 0.5s var(--ease);
-}
-.nav-link:hover::after,
-.nav-link.is-active::after {
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-.nav--teal .nav-link::after {
-  background: var(--color-pine);
-}
-
-.nav-burger span {
-  transition: transform 0.4s var(--ease), width 0.4s var(--ease);
-}
-.nav-burger span:nth-child(2) {
-  width: 70%;
-  margin-left: auto;
-}
-.nav-burger:hover span:nth-child(2) {
-  width: 100%;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .nav {
+  .nav,
+  .nav-logo-ring {
     transition: none;
   }
 }

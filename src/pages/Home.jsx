@@ -1,198 +1,186 @@
-import LiquidBackdrop from "../components/LiquidBackdrop";
-import SplitText from "../components/SplitText";
 import { Link } from "react-router-dom";
-import Hero from "../components/Hero";
+import PoolHero from "../components/PoolHero";
 import Marquee from "../components/Marquee";
-import StatsBand from "../components/StatsBand";
-import WaveDivider from "../components/WaveDivider";
+import LaneRope from "../components/LaneRope";
 import GalleryGrid from "../components/GalleryGrid";
-import HoursList from "../components/HoursList";
 import BookNowButton from "../components/BookNowButton";
 import WeatherWidget from "../components/WeatherWidget";
+import DayPlanner from "../components/DayPlanner";
+import HoursPicker from "../components/HoursPicker";
+import ClosingPool from "../components/ClosingPool";
+import SplitText from "../components/SplitText";
 import Footer from "../components/Footer";
-import { dayVisitorHours, story, ratesWet } from "../data/content";
+import { story, ratesWet, contact } from "../data/content";
 import { getTodayHours } from "../lib/hours";
 import "./Home.css";
 
-const SPLIT = [
-  {
-    key: "water-park",
-    image: "/assets/waterslide.jpg",
-    alt: "Waterslide",
-    title: "WATER PARK",
-    body: "Four slides, three pools and a splash pad. Adults R215.",
-    cta: "See the park",
-    to: "/water-park",
-    overlay: "linear-gradient(180deg, rgba(46,154,163,0.15), rgba(18,59,63,0.85))",
-  },
-  {
-    key: "parties",
-    image: "/assets/toddler-boat.jpg",
-    alt: "Toddler boat slide",
-    title: "PARTIES",
-    body: "Two-hour slots, Tue–Sun. Picnic baskets welcome.",
-    cta: "Party times",
-    to: "/water-park#parties",
-    overlay: "linear-gradient(180deg, rgba(233,96,31,0.12), rgba(42,18,6,0.85))",
-  },
-  {
-    key: "weddings",
-    image: "/assets/wedding.jpg",
-    alt: "Wedding at Graceland",
-    title: "WEDDINGS",
-    body: "Hall seats 180. Garden ceremony under the pergola.",
-    cta: "Wedding rates",
-    to: "/weddings",
-    overlay: "linear-gradient(180deg, rgba(18,59,63,0.10), rgba(18,59,63,0.86))",
-  },
-];
-
 const GALLERY = [
-  { src: "/assets/park.jpg", alt: "Picnic lawns and play villages" },
-  { src: "/assets/bath-pool.jpg", alt: "Bath pool" },
-  { src: "/assets/boma-1.jpg", alt: "Boma" },
+  { src: "/assets/park.jpg", alt: "Cake time at a kids' party" },
+  { src: "/assets/bath-pool.jpg", alt: "The bath pool" },
+  { src: "/assets/boma-1.jpg", alt: "Round the fire at the boma" },
 ];
 
 export default function Home() {
   const today = getTodayHours();
-  const adultsPrice = ratesWet.rows.find((r) => r.label === "Adults").price;
-  const childrenPrice = ratesWet.rows.find((r) => r.label === "Children 3–17").price;
+  const price = (label) => ratesWet.rows.find((r) => r.label === label).price;
+
+  const DAYS_OUT = [
+    {
+      key: "water-park",
+      image: "/assets/waterslide.jpg",
+      alt: "The four waterslides",
+      title: "Water park",
+      body: `Four slides, three pools and a splash pad. Adults ${price("Adults")}, kids ${price("Children 3–17")}.`,
+      cta: "See the park",
+      to: "/water-park",
+      tone: "pool",
+    },
+    {
+      key: "parties",
+      image: "/assets/toddler-boat.jpg",
+      alt: "The toddler boat slide",
+      title: "Kids' parties",
+      body: "Two-hour slots, Tuesday to Sunday. Bring the cake, we'll bring the slides.",
+      cta: "Party packages",
+      to: "/parties",
+      tone: "lilo",
+    },
+    {
+      key: "weddings",
+      image: "/assets/wedding.jpg",
+      alt: "A bride at the garden arch",
+      title: "Weddings",
+      body: "The hall seats 180. Garden ceremonies under the pergola, by the waterfall.",
+      cta: "Wedding rates",
+      to: "/weddings",
+      tone: "lemon",
+    },
+  ];
 
   return (
     <main id="main">
-      <Hero
-        image="/assets/beach-rock-pool.jpg"
-        imageAlt="Beach and rock pool at Graceland"
-        imageFilter="saturate(0.88) contrast(1.04) sepia(0.14)"
-        gradient="linear-gradient(180deg, rgba(18,59,63,0.70) 0%, rgba(18,59,63,0.12) 40%, rgba(42,18,6,0.62) 100%)"
-        navVariant="transparent"
-        eyebrow="PAARL · WESTERN CAPE · SINCE 2012"
+      <PoolHero
+        eyebrow="Paarl · Western Cape · since 2012"
         title={
           <>
-            SLIDE INTO
+            Jump
             <br />
-            YOUR SATURDAY
+            right in
           </>
         }
-        waveAmplitude="mid"
-        vars={{
-          "--hero-height": "880px",
-          "--hero-height-mobile": "620px",
-          "--hero-title-min": "46px",
-          "--hero-title-max": "146px",
-          "--hero-content-max": "960px",
-          "--hero-content-bottom": "150px",
-          "--hero-content-bottom-mobile": "96px",
-        }}
+        next="var(--foam)"
       >
+        <p className="pool-hero-sub">
+          Four waterslides, three pools, a toddler splash pad and two play villages, down Lustigan Road in Paarl.
+        </p>
         <div className="hero-meta">
-          <BookNowButton variant="primary" size="lg" />
+          <BookNowButton size="lg" />
           <div className="hero-meta-text">
-            {today.isOpenDay ? `Open today ${today.hours}` : "Call to confirm today's hours"}
+            {today.isOpenDay ? `Open today ${today.hours}` : "Phone ahead for today's hours"}
             <br />
             <span>
-              Adults {adultsPrice} · Children 3–17 {childrenPrice}
+              Adults {price("Adults")} · kids 3–17 {price("Children 3–17")}
             </span>
           </div>
         </div>
-      </Hero>
+      </PoolHero>
 
       <Marquee />
 
       <section className="story container">
-        <div>
-          <span className="eyebrow">— THE PLACE</span>
+        <div className="story-copy">
+          <span className="eyebrow">The place</span>
           <SplitText as="h2" className="headline story-title">
-            HANDPICKED
-            <br />
-            ROCKS AND
-            <br />
-            LOUD KIDS
+            Handpicked rocks and loud kids
           </SplitText>
           <p className="story-body">{story}</p>
-          <span className="text-link">Our story →</span>
         </div>
         <div className="story-image-wrap">
-          <img src="/assets/gardens.jpg" alt="Gardens with mountain views" />
-          <div className="story-badge">MOUNTAIN VIEWS, ALL DAY</div>
+          <img src="/assets/gardens.jpg" alt="Kids in life jackets at the rock pool" />
+          <div className="story-badge">Mountain views, all day</div>
         </div>
       </section>
 
-      <div className="split">
-        {SPLIT.map((panel) => (
-          <div className="split-panel" key={panel.key}>
-            <img src={panel.image} alt={panel.alt} />
-            <div className="split-panel-overlay" style={{ background: panel.overlay }} />
-            <div className="split-panel-content">
-              <SplitText as="h3" className="headline headline--cream split-panel-title">{panel.title}</SplitText>
-              <p className="split-panel-body">{panel.body}</p>
-              <Link className="btn btn-booknow btn-sm split-panel-cta" to={panel.to}>
-                {panel.cta}
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
+      <section className="days-out container" aria-labelledby="days-out-title">
+        <div className="section-head">
+          <span className="eyebrow">Three ways in</span>
+          <SplitText as="h2" className="headline section-title" id="days-out-title">
+            Pick your kind of day
+          </SplitText>
+        </div>
+        <div className="split">
+          {DAYS_OUT.map((d) => (
+            <Link className={`split-panel split-panel--${d.tone}`} key={d.key} to={d.to}>
+              <div className="split-panel-photo">
+                <img src={d.image} alt={d.alt} />
+              </div>
+              <div className="split-panel-content">
+                <h3 className="split-panel-title">{d.title}</h3>
+                <p className="split-panel-body">{d.body}</p>
+                <span className="split-panel-cta">
+                  {d.cta} <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-      <StatsBand />
-      <WaveDivider amplitude="mid" fill="#fbf3e2" bg="#123b3f" />
+      <LaneRope top="var(--foam)" bottom="var(--deep)" />
+      <section className="planner tiles--deep" aria-labelledby="planner-title">
+        <div className="planner-inner container">
+          <div className="planner-copy">
+            <span className="eyebrow eyebrow--on-dark">Plan your day</span>
+            <SplitText as="h2" className="headline headline--cream planner-title" id="planner-title">
+              What will the day cost?
+            </SplitText>
+            <p className="planner-lede">
+              Add everyone who's coming and switch between a full water day and the dry play villages. Under-ones
+              always swim free.
+            </p>
+          </div>
+          <DayPlanner />
+        </div>
+      </section>
+      <LaneRope top="var(--deep)" bottom="var(--foam)" />
 
       <section className="gallery-section container">
         <div className="gallery-heading">
           <div>
-            <span className="eyebrow">— A 34° AFTERNOON</span>
-            <SplitText as="h2" className="headline gallery-title">THE PLACE, UNFILTERED</SplitText>
+            <span className="eyebrow">A 34° afternoon</span>
+            <SplitText as="h2" className="headline section-title">
+              The place, unfiltered
+            </SplitText>
           </div>
-          <Link to="/gallery" className="text-link">All photos →</Link>
+          <Link to="/gallery" className="text-link">
+            See all the photos →
+          </Link>
         </div>
         <GalleryGrid images={GALLERY} />
       </section>
 
-      <div className="hours-today container">
+      <section className="hours-today container" aria-labelledby="hours-title">
         <div className="hours-today-main">
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: "24px" }}>
-            <div>
-              <span className="eyebrow">— TODAY, {today.dayName.toUpperCase()}</span>
-              <div className="hours-today-time">
-                {today.isOpenDay ? (
-                  today.hours.split("–").map((t, i) => (
-                    <span key={i}>
-                      {t}
-                      {i === 0 && <br />}
-                    </span>
-                  ))
-                ) : (
-                  "CALL TO CONFIRM"
-                )}
-              </div>
-              <div className="hours-today-note">
-                {today.isOpenDay
-                  ? `Gates close ${today.gatesClose}. Last slide ${today.lastSlide}.`
-                  : today.note}
-              </div>
-            </div>
-            <WeatherWidget />
+          <span className="eyebrow">Opening times</span>
+          <SplitText as="h2" className="headline section-title" id="hours-title">
+            Can we swim on…
+          </SplitText>
+          <div className="hours-today-picker">
+            <HoursPicker />
           </div>
         </div>
-        <div className="hours-today-side">
-          <div className="hours-today-side-title">DAY VISITOR HOURS</div>
-          <HoursList rows={dayVisitorHours} />
-        </div>
-      </div>
-
-      <div className="closing-cta-wrap">
-        <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-        <div className="closing-cta has-liquid">
-          <LiquidBackdrop palette="tangerine" />
-          <SplitText as="h2" className="headline closing-cta-title">COME GET WET</SplitText>
-          <p className="closing-cta-sub">
-            No forms, no fuss. Ring Conny on 072 264 4009 or book online.
+        <aside className="hours-today-side">
+          <WeatherWidget />
+          <p className="hours-today-call">
+            Not sure? Ring Conny on <a href={contact.phoneHref}>{contact.phone}</a>.
           </p>
-          <div className="closing-cta-btn">
-            <BookNowButton size="hero" />
-          </div>
-        </div>
-      </div>
+        </aside>
+      </section>
+
+      <ClosingPool
+        title="Come get wet"
+        sub={`No forms, no fuss. Ring Conny on ${contact.phone} or book online.`}
+      />
 
       <Footer variant="full" />
     </main>

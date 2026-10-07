@@ -1,0 +1,102 @@
+/* Shared page-section building blocks used by every inner page. */
+
+.section-head {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head--center {
+  text-align: center;
+}
+.section-title {
+  font-size: var(--step-1);
+  margin-top: 18px;
+}
+
+.sec {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+/* Deep-end band: dark tiled section holding ticket cards */
+.deep-band {
+  color: var(--foam);
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+.deep-band .section-title {
+  color: var(--foam);
+}
+.deep-band-lede {
+  max-width: 560px;
+  margin: 18px auto 0;
+  color: var(--pool-light);
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(24px, 3vw, 40px);
+  align-items: start;
+}
+
+/* Two columns: hours on one side, a rules card on the other */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+.card {
+  background: #fff;
+  border: 2.5px solid var(--deep);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 0 var(--deep);
+  padding: clamp(24px, 3.4vw, 44px);
+}
+.card--lemon {
+  background: var(--lemon);
+}
+.card--pool {
+  background: var(--pool);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-2);
+  line-height: 0.95;
+}
+
+.subhead {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 28px 0 6px;
+}
+
+@media (max-width: 900px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Title band for pages without a photo hero (Visit, Gallery, legal) */
+.page-title {
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: clamp(48px, 7vw, 88px);
+  margin-top: -96px;
+  padding-top: calc(96px + clamp(40px, 6vw, 72px));
+}
+.headline.page-title-text {
+  font-size: clamp(64px, 11vw, 176px);
+  margin-top: 20px;
+  color: #fff;
+  -webkit-text-stroke: clamp(4px, 0.55vw, 9px) var(--deep);
+  paint-order: stroke fill;
+}
+.page-title-text .split-char:nth-child(odd) {
+  color: var(--lemon);
+}

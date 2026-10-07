@@ -2,8 +2,8 @@
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: var(--color-pine);
-  color: var(--color-cream);
+  background: var(--pool);
+  color: var(--deep);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,9 +14,11 @@
 .preloader-word {
   display: flex;
   font-family: var(--font-display);
-  font-size: clamp(48px, 13vw, 210px);
+  font-size: clamp(56px, 14vw, 220px);
   line-height: 0.9;
-  letter-spacing: -0.04em;
+  color: #fff;
+  -webkit-text-stroke: clamp(4px, 0.6vw, 9px) var(--deep);
+  paint-order: stroke fill;
 }
 
 .preloader-mask {
@@ -29,7 +31,10 @@
   display: inline-block;
 }
 .preloader-mask:nth-child(3n + 2) .preloader-char {
-  color: var(--color-yellow);
+  color: var(--lemon);
+}
+.preloader-mask:nth-child(4n) .preloader-char {
+  color: var(--lilo);
 }
 
 .preloader-meta {
@@ -42,14 +47,14 @@
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.22em;
-  color: var(--color-teal-pale);
+  color: var(--deep);
 }
 
 .preloader-count {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 48px);
   letter-spacing: 0;
-  color: var(--color-tangerine);
+  color: var(--deep);
   line-height: 1;
 }
 
@@ -59,12 +64,14 @@
   right: var(--gutter);
   bottom: 40px;
   height: 3px;
-  background: rgba(251, 243, 226, 0.15);
+  background: rgba(7, 48, 90, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
 }
 .preloader-bar i {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--color-yellow), var(--color-tangerine));
+  background: var(--deep);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }

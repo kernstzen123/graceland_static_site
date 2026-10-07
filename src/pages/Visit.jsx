@@ -1,11 +1,12 @@
-import LiquidBackdrop from "../components/LiquidBackdrop";
 import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import HoursList from "../components/HoursList";
 import BookNowButton from "../components/BookNowButton";
 import Footer from "../components/Footer";
-import WaveDivider from "../components/WaveDivider";
-import { contact, dayVisitorHours, partyHours, closedNote, mapCenter } from "../data/content";
+import LaneRope from "../components/LaneRope";
+import HoursPicker from "../components/HoursPicker";
+import ClosingPool from "../components/ClosingPool";
+import { contact, partyHours, closedNote } from "../data/content";
 import "./Visit.css";
 
 const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
@@ -17,33 +18,34 @@ export default function Visit() {
     <main id="main" className="visit-page">
       <Nav variant="teal" />
 
-      <div className="visit-title-block container">
-        <span className="eyebrow">— LUSTIGAN ROAD, PAARL</span>
-        <SplitText as="h1" className="headline visit-title">FIND US</SplitText>
+      <div className="page-title tiles">
+        <div className="container">
+          <span className="eyebrow">Lustigan Road, Paarl</span>
+          <SplitText as="h1" className="headline page-title-text" split="hero">
+            Find us
+          </SplitText>
+        </div>
       </div>
+      <LaneRope top="var(--pool)" bottom="var(--foam)" />
 
-      <div className="visit-grid">
-        <div className="visit-contact">
-          <div className="visit-contact-title">CONTACT</div>
+      <div className="visit-grid container">
+        <div className="visit-contact card">
+          <h2 className="card-title">Contact</h2>
           <div className="visit-contact-list">
             <div>
-              <div className="visit-contact-label">PHONE</div>
-              <a className="visit-contact-value" href={contact.phoneHref} style={{ textDecoration: "none" }}>
+              <div className="visit-contact-label">Phone</div>
+              <a className="visit-contact-value" href={contact.phoneHref}>
                 {contact.phone}
               </a>
             </div>
             <div>
-              <div className="visit-contact-label">EMAIL</div>
-              <a
-                className="visit-contact-value visit-contact-value--text"
-                href={`mailto:${contact.email}`}
-                style={{ textDecoration: "none" }}
-              >
+              <div className="visit-contact-label">Email</div>
+              <a className="visit-contact-value visit-contact-value--text" href={`mailto:${contact.email}`}>
                 {contact.email}
               </a>
             </div>
             <div>
-              <div className="visit-contact-label">ADDRESS</div>
+              <div className="visit-contact-label">Address</div>
               <div className="visit-contact-value--plain">
                 {contact.address.map((line, i) => (
                   <span key={line}>
@@ -54,7 +56,7 @@ export default function Visit() {
               </div>
             </div>
             <div>
-              <div className="visit-contact-label">OFFICE HOURS</div>
+              <div className="visit-contact-label">Office hours</div>
               <div className="visit-contact-value--plain">{contact.officeHours}</div>
             </div>
           </div>
@@ -63,8 +65,8 @@ export default function Visit() {
           </div>
         </div>
 
-        <div className="visit-getting">
-          <div className="visit-getting-title">GETTING HERE</div>
+        <div className="visit-getting card card--lemon">
+          <h2 className="card-title">Getting here</h2>
           <p className="visit-getting-body">
             Off the R301 on the Paarl side, then follow Lustigan Road to the
             end. Twenty-five minutes from Stellenbosch, fifty from Cape Town.
@@ -88,27 +90,20 @@ export default function Visit() {
 
       <div className="visit-hours container">
         <div>
-          <div className="visit-hours-title">DAY VISITOR HOURS</div>
-          <div style={{ marginTop: "20px" }}>
-            <HoursList rows={dayVisitorHours} />
+          <h2 className="card-title">Swim days</h2>
+          <div className="visit-hours-body">
+            <HoursPicker />
           </div>
         </div>
         <div>
-          <div className="visit-hours-title">PARTY SLOTS</div>
-          <div style={{ marginTop: "20px" }}>
+          <h2 className="card-title">Party slots</h2>
+          <div className="visit-hours-body">
             <HoursList rows={partyHours} closedNote={closedNote} />
           </div>
         </div>
       </div>
 
-      <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="visit-closing has-liquid">
-        <LiquidBackdrop palette="tangerine" />
-        <SplitText as="h2" className="headline visit-closing-title">SEE YOU SATURDAY</SplitText>
-        <div className="visit-closing-btn">
-          <BookNowButton size="hero" />
-        </div>
-      </div>
+      <ClosingPool title="See you Saturday" />
 
       <Footer variant="simple" />
     </main>

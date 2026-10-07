@@ -1,9 +1,9 @@
-import LiquidBackdrop from "../components/LiquidBackdrop";
-import SplitText from "../components/SplitText";
 import Hero from "../components/Hero";
-import WaveDivider from "../components/WaveDivider";
+import LaneRope from "../components/LaneRope";
 import Button from "../components/Button";
 import BookNowButton from "../components/BookNowButton";
+import ClosingPool from "../components/ClosingPool";
+import SplitText from "../components/SplitText";
 import Footer from "../components/Footer";
 import { weddingRates, contact } from "../data/content";
 import "./Weddings.css";
@@ -13,54 +13,36 @@ export default function Weddings() {
     <main id="main">
       <Hero
         image="/assets/wedding.jpg"
-        imageAlt="Wedding at Graceland"
-        imageFilter="saturate(0.82) sepia(0.12)"
-        gradient="linear-gradient(180deg, rgba(18,59,63,0.62) 0%, rgba(18,59,63,0.10) 45%, rgba(18,59,63,0.72) 100%)"
-        navVariant="transparent"
-        eyebrow="WEDDINGS · CORPORATE · PRIVATE FUNCTIONS"
-        eyebrowVariant="plain"
+        imageAlt="A bride under the garden arch at Graceland"
+        eyebrow="Weddings · corporate · private functions"
         title={
           <>
-            MARRIED
+            Married
             <br />
-            UNDER THE
+            under the
             <br />
-            MOUNTAIN
+            mountain
           </>
         }
-        waveAmplitude="low"
-        vars={{
-          "--hero-height": "800px",
-          "--hero-height-mobile": "560px",
-          "--hero-title-min": "40px",
-          "--hero-title-max": "124px",
-          "--hero-content-max": "900px",
-          "--hero-content-bottom": "140px",
-          "--hero-content-bottom-mobile": "80px",
-        }}
+        sticker="Hall seats 180"
       >
         <p className="hero-body">
-          Venue Hall seats 180. Garden ceremony under the pergola, beside the
-          waterfall feature. Twenty minutes out of Paarl.
+          A garden ceremony under the pergola, beside the waterfall, then a reception in the Venue Hall.
         </p>
         <div className="hero-meta">
-          <BookNowButton variant="primary" size="lg" />
+          <BookNowButton size="lg" />
         </div>
       </Hero>
 
-      <div className="setting container">
+      <section className="setting sec container">
         <div>
-          <span className="eyebrow">— THE SETTING</span>
-          <SplitText as="h2" className="headline setting-title">
-            A GARDEN,
-            <br />
-            A WATERFALL,
-            <br />A RED CARPET
+          <span className="eyebrow">The setting</span>
+          <SplitText as="h2" className="headline section-title">
+            A garden, a waterfall, a red carpet
           </SplitText>
           <p className="setting-body">
-            The garden ceremony includes the pergola, waterfall feature, red
-            carpet and white chairs. A serene sanctuary with a lush garden
-            sprinkled with mystical rocks, handpicked by the owner herself.
+            The garden ceremony includes the pergola, waterfall feature, red carpet and white chairs. A serene
+            sanctuary with a lush garden sprinkled with mystical rocks, handpicked by the owner herself.
           </p>
           <div className="setting-stats">
             {weddingRates.capacity.map((c) => (
@@ -72,59 +54,56 @@ export default function Weddings() {
           </div>
         </div>
         <div className="setting-images">
-          <img src="/assets/venue-1.jpg" alt="Graceland venue" />
-          <img src="/assets/venue-2.jpg" alt="Graceland venue detail" />
+          <img src="/assets/venue-1.jpg" alt="A couple exchanging rings" />
+          <img src="/assets/venue-2.jpg" alt="The rock garden" />
         </div>
-      </div>
+      </section>
 
-      <WaveDivider amplitude="low" fill="#123b3f" bg="#fbf3e2" />
-      <div className="wr-section has-liquid">
-        <LiquidBackdrop palette="pine" bubbles={false} />
-        <div className="wr-heading">
-          <span className="eyebrow eyebrow--on-dark">— {weddingRates.period}</span>
-          <SplitText as="h2" className="headline wr-title">WEDDING RATES</SplitText>
-        </div>
-        <div className="wr-cards">
-          <div className="wr-card">
-            <div className="wr-card-title">RECEPTION</div>
-            <div className="wr-card-price">
-              <div className="wr-card-price-value">{weddingRates.reception.price}</div>
-              <div className="wr-card-price-unit">{weddingRates.reception.unit}</div>
-            </div>
-            <div className="wr-card-min">{weddingRates.reception.minimum}</div>
+      <LaneRope top="var(--foam)" bottom="var(--deep)" />
+      <section className="deep-band tiles--deep" aria-labelledby="wr-title">
+        <div className="container">
+          <div className="section-head section-head--center">
+            <span className="eyebrow eyebrow--on-dark">{weddingRates.period}</span>
+            <SplitText as="h2" className="headline section-title" id="wr-title">
+              Wedding rates
+            </SplitText>
           </div>
-          <div className="wr-card">
-            <div className="wr-card-title">CEREMONY</div>
-            <div className="wr-card-price">
-              <div className="wr-card-price-value">{weddingRates.ceremony.price}</div>
-              <div className="wr-card-price-unit">{weddingRates.ceremony.unit}</div>
+          <div className="wr-cards">
+            <div className="wr-card wr-card--pool">
+              <div className="wr-card-title">Reception</div>
+              <div className="wr-card-price">
+                <div className="wr-card-price-value">{weddingRates.reception.price}</div>
+                <div className="wr-card-price-unit">{weddingRates.reception.unit}</div>
+              </div>
+              <div className="wr-card-min">{weddingRates.reception.minimum}</div>
             </div>
-            <div className="wr-card-min">{weddingRates.ceremony.minimum}</div>
+            <div className="wr-card wr-card--lemon">
+              <div className="wr-card-title">Ceremony</div>
+              <div className="wr-card-price">
+                <div className="wr-card-price-value">{weddingRates.ceremony.price}</div>
+                <div className="wr-card-price-unit">{weddingRates.ceremony.unit}</div>
+              </div>
+              <div className="wr-card-min">{weddingRates.ceremony.minimum}</div>
+            </div>
+          </div>
+          <div className="wr-extras">
+            {weddingRates.extras.map((e) => (
+              <div className="wr-extra" key={e.value}>
+                <div className="wr-extra-value">{e.value}</div>
+                <div className="wr-extra-label">{e.label}</div>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="wr-extras">
-          {weddingRates.extras.map((e) => (
-            <div className="wr-extra" key={e.value}>
-              <div className="wr-extra-value">{e.value}</div>
-              <div className="wr-extra-label">{e.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <WaveDivider amplitude="low" bg="#123b3f" fill="#fbf3e2" />
+      </section>
+      <LaneRope top="var(--deep)" bottom="var(--pool)" />
 
-      <div className="weddings-closing container">
-        <SplitText as="h2" className="headline weddings-closing-title">COME AND SEE IT</SplitText>
-        <p className="weddings-closing-sub">
-          Walk the garden with Conny. No forms — just ring or write.
-        </p>
-        <div className="weddings-closing-actions">
-          <BookNowButton variant="primary" size="lg" />
-          <Button variant="ghost" size="lg" href={contact.phoneHref}>
-            {contact.phone}
-          </Button>
-        </div>
-      </div>
+      <ClosingPool title="Come and see it" sub="Walk the garden with Conny. No forms, just ring or write.">
+        <BookNowButton size="lg" />
+        <Button variant="ghost" size="lg" href={contact.phoneHref}>
+          {contact.phone}
+        </Button>
+      </ClosingPool>
 
       <Footer variant="simple" />
     </main>

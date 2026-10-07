@@ -1,0 +1,59 @@
+.closing-pool {
+  position: relative;
+  overflow: hidden;
+  background: var(--pool);
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.closing-pool-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-top: clamp(80px, 11vw, 150px);
+  padding-bottom: clamp(80px, 11vw, 150px);
+  pointer-events: none;
+}
+.closing-pool-inner a,
+.closing-pool-inner button {
+  pointer-events: auto;
+}
+
+.closing-pool-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 10vw, 160px);
+  line-height: 0.88;
+  color: #fff;
+  -webkit-text-stroke: clamp(4px, 0.5vw, 8px) var(--deep);
+  paint-order: stroke fill;
+  user-select: none;
+}
+.closing-pool-title .split-word {
+  overflow: visible;
+}
+.closing-pool-title .split-char {
+  filter: drop-shadow(0 10px 0 rgba(7, 48, 90, 0.3));
+}
+.closing-pool-title .split-char:nth-child(even) {
+  color: var(--lemon);
+}
+
+.closing-pool-sub {
+  display: inline-block;
+  margin-top: 26px;
+  font-weight: 600;
+  font-size: clamp(17px, 1.5vw, 20px);
+  background: rgba(243, 251, 255, 0.86);
+  border-radius: 16px;
+  padding: 10px 16px;
+}
+
+.closing-pool-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}

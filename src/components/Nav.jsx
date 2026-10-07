@@ -7,25 +7,21 @@ import { lockScroll } from "../lib/motion";
 import "./Nav.css";
 
 /**
- * Site header. `variant`:
- *  - "transparent" — overlays a hero image, goes solid pine once scrolled
- *    past it (Home, Weddings).
- *  - "pine"  — always solid pine (Water Park: hero photo is busy enough
- *    that the nav reads better solid from the start).
- *  - "teal"  — always solid teal, dark text (Visit: no hero).
+ * Floating pill header, the same on every page. It ducks out of the way
+ * while you scroll down and pops back up the moment you scroll up.
+ * `variant` only decides whether the page needs a spacer under it (pages
+ * without a hero), so the fixed bar never covers the page title.
  */
 export default function Nav({ variant = "transparent" }) {
-  const [scrolled, setScrolled] = useState(variant !== "transparent");
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Solid once past the hero; tucks away while scrolling down and slides
-  // back the moment you scroll up.
   useEffect(() => {
     let last = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      if (variant === "transparent") setScrolled(y > 60);
+      setScrolled(y > 30);
       if (y < 240 || y < last - 2) setHidden(false);
       else if (y > last + 2) setHidden(true);
       last = y;
@@ -33,28 +29,22 @@ export default function Nav({ variant = "transparent" }) {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [variant]);
+  }, []);
 
   useEffect(() => {
     lockScroll(open);
     return () => lockScroll(false);
   }, [open]);
 
-  const isTeal = variant === "teal";
-  const isSolid = variant === "pine" || (variant === "transparent" && scrolled);
-
-  const navClass = [
-    "nav",
-    isTeal ? "nav--teal" : isSolid ? "nav--solid" : "nav--transparent",
-    hidden && !open ? "nav--hidden" : "",
-  ].join(" ");
+  const cls = ["nav", scrolled ? "nav--scrolled" : "", hidden && !open ? "nav--hidden" : ""].join(" ");
 
   return (
     <>
-      <header className={navClass}>
-        <div className="nav-inner container">
-          <Link to="/" className="nav-logo">
-            GRACELAND
+      <header className={cls}>
+        <div className="nav-inner">
+          <Link to="/" className="nav-logo" aria-label="Graceland Venues home">
+            <span className="nav-logo-ring" aria-hidden="true" />
+            Graceland
           </Link>
           <nav className="nav-links" aria-label="Primary">
             {navItems.map((item) => (
@@ -66,8 +56,10 @@ export default function Nav({ variant = "transparent" }) {
                 {item.label}
               </NavLink>
             ))}
-            <BookNowButton size="sm" />
           </nav>
+          <div className="nav-cta">
+            <BookNowButton size="sm" />
+          </div>
           <button
             className="nav-burger"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -80,6 +72,7 @@ export default function Nav({ variant = "transparent" }) {
           </button>
         </div>
       </header>
+      {variant !== "transparent" && variant !== "pine" && <div className="nav-spacer" aria-hidden="true" />}
       {open && <MobileNavOverlay onClose={() => setOpen(false)} />}
     </>
   );

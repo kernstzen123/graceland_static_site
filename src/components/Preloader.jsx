@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, markIntroDone, prefersReducedMotion, lockScroll } from "../lib/motion";
 import "./Preloader.css";
 
-const WORD = "GRACELAND";
+const WORD = "Graceland";
 
 /** First-visit intro: letters rise, a counter fills, then the pine curtain
  *  lifts on a wave edge. Shown once per browser session. */
@@ -83,7 +83,7 @@ export default function Preloader() {
         ))}
       </div>
       <div className="preloader-meta">
-        <span>PAARL · WESTERN CAPE</span>
+        <span>FILLING THE POOL</span>
         <span className="preloader-count" ref={count}>
           000
         </span>
@@ -94,7 +94,7 @@ export default function Preloader() {
       <svg className="preloader-wave" viewBox="0 0 1440 100" preserveAspectRatio="none">
         <path
           d="M0,0 L1440,0 L1440,40 C1260,80 1080,96 900,60 C720,24 540,10 360,44 C180,78 60,70 0,50 Z"
-          fill="#123b3f"
+          fill="#27c1ee"
         />
       </svg>
     </div>

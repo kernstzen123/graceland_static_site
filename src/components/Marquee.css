@@ -1,16 +1,22 @@
+/* A pool noodle floating across the page, slightly askew */
 .marquee {
-  background: var(--color-teal);
-  border-top: 3px solid var(--color-ink);
-  border-bottom: 3px solid var(--color-ink);
-  padding: 20px 0;
+  position: relative;
+  z-index: 3;
+  background: var(--lemon);
+  border-top: 2.5px solid var(--deep);
+  border-bottom: 2.5px solid var(--deep);
+  padding: 16px 0;
   overflow: hidden;
+  transform: rotate(-1.6deg) scale(1.03);
+  margin: -14px 0 -6px;
+  box-shadow: 0 8px 0 rgba(7, 48, 90, 0.12);
 }
 
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 34px;
-  padding-right: 34px; /* Matches gap to ensure 50% transform is a perfect loop */
+  gap: 30px;
+  padding-right: 30px;
   width: max-content;
   white-space: nowrap;
   will-change: transform;
@@ -18,27 +24,22 @@
 
 .marquee-item {
   font-family: var(--font-display);
-  font-size: clamp(19px, 2.4vw, 30px);
-  color: var(--color-pine);
+  font-size: clamp(20px, 2.4vw, 32px);
+  color: var(--deep);
 }
 
-.marquee-dot {
-  color: var(--color-yellow);
-  font-size: clamp(19px, 2.4vw, 30px);
-}
-
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
+/* the separators are little swim rings */
 .marquee-dot {
   display: inline-block;
-  animation: marquee-spin 6s linear infinite;
+  width: 26px;
+  height: 26px;
+  font-size: 0;
+  border-radius: 50%;
+  border: 2.5px solid var(--deep);
+  background: repeating-conic-gradient(var(--lilo) 0 45deg, #fff 45deg 90deg);
+  -webkit-mask: radial-gradient(circle, transparent 4px, #000 4.5px);
+  mask: radial-gradient(circle, transparent 4px, #000 4.5px);
+  animation: marquee-spin 4s linear infinite;
 }
 @keyframes marquee-spin {
   to {

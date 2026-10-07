@@ -8,7 +8,7 @@ function FooterBottom() {
   return (
     <div className="footer-bottom">
       <SplitText as="div" className="footer-wordmark" split="footer">
-        GRACELAND
+        Graceland
       </SplitText>
       <div className="footer-legal">
         <span>© {new Date().getFullYear()} Graceland Venues · Paarl</span>
@@ -25,10 +25,10 @@ function FooterBottom() {
 export default function Footer({ variant = "simple" }) {
   if (variant === "full") {
     return (
-      <footer className="footer">
+      <footer className="footer tiles--deep">
         <div className="footer-grid">
         <div>
-          <div className="footer-brand">GRACELAND</div>
+          <div className="footer-brand">Graceland</div>
           <p className="footer-blurb">
             {contact.address.join(", ")}. Family-owned water park and venue
             since 2012.
@@ -65,9 +65,9 @@ export default function Footer({ variant = "simple" }) {
   }
 
   return (
-    <footer className="footer footer--simple">
+    <footer className="footer footer--simple tiles--deep">
       <div className="footer-grid">
-      <div className="footer-brand">GRACELAND</div>
+      <div className="footer-brand">Graceland</div>
       <div className="footer-col">
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
         <br />
