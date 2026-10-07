@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import HoursList from "../components/HoursList";
 import BookNowButton from "../components/BookNowButton";
 import Footer from "../components/Footer";
-import LaneRope from "../components/LaneRope";
+import WaterEdge from "../components/WaterEdge";
 import HoursPicker from "../components/HoursPicker";
 import ClosingPool from "../components/ClosingPool";
 import { contact, partyHours, closedNote } from "../data/content";
@@ -18,7 +18,7 @@ export default function Visit() {
     <main id="main" className="visit-page">
       <Nav variant="teal" />
 
-      <div className="page-title tiles">
+      <div className="page-title bg-pool">
         <div className="container">
           <span className="eyebrow">Lustigan Road, Paarl</span>
           <SplitText as="h1" className="headline page-title-text" split="hero">
@@ -26,7 +26,7 @@ export default function Visit() {
           </SplitText>
         </div>
       </div>
-      <LaneRope top="var(--pool)" bottom="var(--foam)" />
+      <WaterEdge top="var(--pool)" bottom="var(--foam)" />
 
       <div className="visit-grid container">
         <div className="visit-contact card">

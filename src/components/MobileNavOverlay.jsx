@@ -5,7 +5,7 @@ import "./MobileNavOverlay.css";
 
 export default function MobileNavOverlay({ onClose }) {
   return (
-    <div className="mobile-overlay tiles" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div className="mobile-overlay bg-pool" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="mobile-overlay-top">
         <span className="mobile-overlay-logo">Graceland</span>
         <button className="mobile-overlay-close" aria-label="Close menu" onClick={onClose}>

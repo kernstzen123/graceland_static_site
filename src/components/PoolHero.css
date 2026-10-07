@@ -10,6 +10,25 @@
   touch-action: pan-y;
 }
 
+.pool-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Keeps the headline and info readable over a busy photo: darker at the
+   bottom-left where the copy sits, clear over the rest of the pool. */
+.pool-hero-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(7, 48, 90, 0.35) 0%, rgba(7, 48, 90, 0) 22%),
+    linear-gradient(20deg, rgba(7, 48, 90, 0.62) 0%, rgba(7, 48, 90, 0.25) 42%, rgba(7, 48, 90, 0) 70%);
+}
+
 .pool-hero-content {
   position: relative;
   z-index: 2;
@@ -105,7 +124,7 @@
   }
 }
 
-.pool-hero-rope {
+.pool-hero-edge {
   position: relative;
   z-index: 1;
 }

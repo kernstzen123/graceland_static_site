@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import LaneRope from "../components/LaneRope";
+import WaterEdge from "../components/WaterEdge";
 import ClosingPool from "../components/ClosingPool";
 import SplitText from "../components/SplitText";
 import { gsap, prefersReducedMotion } from "../lib/motion";
@@ -101,7 +101,7 @@ export default function Gallery() {
     <main id="main" className="gallery-page">
       <Nav variant="teal" />
 
-      <div className="page-title tiles">
+      <div className="page-title bg-pool">
         <div className="container gallery-title-row">
           <div>
             <span className="eyebrow">The place, unfiltered</span>
@@ -117,7 +117,7 @@ export default function Gallery() {
           </p>
         </div>
       </div>
-      <LaneRope top="var(--pool)" bottom="var(--foam)" />
+      <WaterEdge top="var(--pool)" bottom="var(--foam)" />
 
       <div className="gallery-deck container" ref={deck}>
         {ALL_PHOTOS.map((img) => (

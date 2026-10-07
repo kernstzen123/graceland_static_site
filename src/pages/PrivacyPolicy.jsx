@@ -1,7 +1,7 @@
 import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import LaneRope from "../components/LaneRope";
+import WaterEdge from "../components/WaterEdge";
 import "./Legal.css";
 
 export default function PrivacyPolicy() {
@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
     <main id="main" className="legal-page">
       <Nav variant="teal" />
       
-      <div className="page-title tiles">
+      <div className="page-title bg-pool">
         <div className="container">
           <span className="eyebrow">The boring but important stuff</span>
           <SplitText as="h1" className="headline page-title-text legal-title" split="hero">
@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
           </SplitText>
         </div>
       </div>
-      <LaneRope top="var(--pool)" bottom="var(--foam)" />
+      <WaterEdge top="var(--pool)" bottom="var(--foam)" />
 
       <div className="legal-content container">
         <span className="legal-meta">Last Updated: September 9, 2026</span>

@@ -1,13 +1,13 @@
 import Nav from "./Nav";
-import LaneRope from "./LaneRope";
+import WaterEdge from "./WaterEdge";
 import ShaderCanvas from "./ShaderCanvas";
 import SplitText from "./SplitText";
 import "./Hero.css";
 
 /**
- * Inner-page hero: headline on the pool-tile floor, the page's photo in a
- * tilted float-edged frame whose water ripples under the cursor, and a lane
- * rope where the pool ends. Home uses PoolHero instead.
+ * Inner-page hero: headline on pool blue, the page's photo in a tilted
+ * float-edged frame whose water ripples under the cursor, and a soft water
+ * line where the pool ends. Home uses PoolHero instead.
  */
 export default function Hero({
   image,
@@ -22,7 +22,7 @@ export default function Hero({
 }) {
   const filter = imageFilter ? { filter: imageFilter } : undefined;
   return (
-    <div className="hero tiles">
+    <div className="hero bg-pool">
       <Nav variant={navVariant} />
       <div className="hero-inner container">
         <div className="hero-content">
@@ -38,7 +38,7 @@ export default function Hero({
           {sticker && <span className="hero-sticker">{sticker}</span>}
         </figure>
       </div>
-      <LaneRope top="transparent" bottom={next} />
+      <WaterEdge top="transparent" bottom={next} />
     </div>
   );
 }

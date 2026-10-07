@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import PoolHero from "../components/PoolHero";
 import Marquee from "../components/Marquee";
-import LaneRope from "../components/LaneRope";
+import WaterEdge from "../components/WaterEdge";
 import GalleryGrid from "../components/GalleryGrid";
 import BookNowButton from "../components/BookNowButton";
 import WeatherWidget from "../components/WeatherWidget";
@@ -60,6 +60,8 @@ export default function Home() {
   return (
     <main id="main">
       <PoolHero
+        image="/assets/beach-rock-pool.jpg"
+        imageAlt="The beach pool and rock pool at Graceland"
         eyebrow="Paarl · Western Cape · since 2012"
         title={
           <>
@@ -126,8 +128,8 @@ export default function Home() {
         </div>
       </section>
 
-      <LaneRope top="var(--foam)" bottom="var(--deep)" />
-      <section className="planner tiles--deep" aria-labelledby="planner-title">
+      <WaterEdge top="var(--foam)" bottom="var(--deep)" />
+      <section className="planner bg-deep" aria-labelledby="planner-title">
         <div className="planner-inner container">
           <div className="planner-copy">
             <span className="eyebrow eyebrow--on-dark">Plan your day</span>
@@ -142,7 +144,7 @@ export default function Home() {
           <DayPlanner />
         </div>
       </section>
-      <LaneRope top="var(--deep)" bottom="var(--foam)" />
+      <WaterEdge top="var(--deep)" bottom="var(--foam)" />
 
       <section className="gallery-section container">
         <div className="gallery-heading">

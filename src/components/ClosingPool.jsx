@@ -7,7 +7,7 @@ import "./ClosingPool.css";
 export default function ClosingPool({ title, sub, children }) {
   return (
     <section className="closing-pool" data-bubbles>
-      <PoolSurface floatSelector=".closing-pool-title .split-char" lane={-1} />
+      <PoolSurface floatSelector=".closing-pool-title .split-char" />
       <div className="closing-pool-inner container">
         <SplitText as="h2" className="closing-pool-title">
           {title}

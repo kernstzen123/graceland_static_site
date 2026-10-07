@@ -1,5 +1,5 @@
 import Hero from "../components/Hero";
-import LaneRope from "../components/LaneRope";
+import WaterEdge from "../components/WaterEdge";
 import RateTable from "../components/RateTable";
 import HoursList from "../components/HoursList";
 import RulesList from "../components/RulesList";
@@ -57,8 +57,8 @@ export default function Parties() {
         </ul>
       </section>
 
-      <LaneRope top="var(--foam)" bottom="var(--deep)" />
-      <section className="deep-band tiles--deep" aria-labelledby="packages-title">
+      <WaterEdge top="var(--foam)" bottom="var(--deep)" />
+      <section className="deep-band bg-deep" aria-labelledby="packages-title">
         <div className="container">
           <div className="section-head section-head--center">
             <span className="eyebrow eyebrow--on-dark">What it costs</span>
@@ -73,7 +73,7 @@ export default function Parties() {
           </div>
         </div>
       </section>
-      <LaneRope top="var(--deep)" bottom="var(--foam)" />
+      <WaterEdge top="var(--deep)" bottom="var(--foam)" />
 
       <section className="sec container two-col" aria-label="Party slots and rules">
         <div>

@@ -37,16 +37,17 @@ The site is designed as the swimming pool itself.
 - **Type**: Bagel Fat One for headlines (inflatable-looking letters),
   Bricolage Grotesque for text, DM Mono for times, prices and labels.
 - **Pool vernacular as structure**: section labels are painted pool-wall
-  signs, sections are divided by lane ropes (`LaneRope.jsx`), prices are
+  signs, sections meet at a soft drifting water line (`WaterEdge.jsx`), prices are
   gate tickets with a tear line, rules are round poolside signs, and pool
-  sections sit on a tiled floor (`.tiles`).
+  sections use plain pool blue or deep-end navy (`.bg-pool`, `.bg-deep`).
 
 ### Interactive pieces
 
 - **The splashable pool** (`PoolSurface.jsx`): the Home hero and every
   page's closing section. A small wave-equation simulation holds the water
-  surface and a WebGL shader draws the tiled floor through it (refraction,
-  sunlight caustics, glints, a painted lane line). Click or tap to splash;
+  surface and a WebGL shader draws the water (refraction,
+  sunlight caustics, glints). On Home the water sits over a real photo of
+  the pool (`beach-rock-pool.jpg`). Click or tap to splash;
   the headline letters float on the water and rock on the waves.
 - **Day planner** (`DayPlanner.jsx`): add who's coming, switch between a
   water day and the dry villages, and see the gate total from the real
@@ -57,7 +58,7 @@ The site is designed as the swimming pool itself.
   around and tidy them back.
 - Smaller touches: jelly-wobble buttons that squish when pressed, a depth
   gauge that fills as you scroll (desktop), bubbles off the pointer over
-  water, a lane rope whose floats bob and spin, and a pool-noodle marquee.
+  water, and a pool-noodle marquee.
 
 ### Motion system
 

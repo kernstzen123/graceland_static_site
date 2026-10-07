@@ -25,7 +25,7 @@ function FooterBottom() {
 export default function Footer({ variant = "simple" }) {
   if (variant === "full") {
     return (
-      <footer className="footer tiles--deep">
+      <footer className="footer bg-deep">
         <div className="footer-grid">
         <div>
           <div className="footer-brand">Graceland</div>
@@ -65,7 +65,7 @@ export default function Footer({ variant = "simple" }) {
   }
 
   return (
-    <footer className="footer footer--simple tiles--deep">
+    <footer className="footer footer--simple bg-deep">
       <div className="footer-grid">
       <div className="footer-brand">Graceland</div>
       <div className="footer-col">
