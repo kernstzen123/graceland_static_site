@@ -13,7 +13,7 @@
   padding-right: 34px; /* Matches gap to ensure 50% transform is a perfect loop */
   width: max-content;
   white-space: nowrap;
-  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
 }
 
 .marquee-item {
@@ -33,5 +33,21 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+.marquee-dot {
+  display: inline-block;
+  animation: marquee-spin 6s linear infinite;
+}
+@keyframes marquee-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-dot {
+    animation: none;
   }
 }

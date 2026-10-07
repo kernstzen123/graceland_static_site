@@ -1,3 +1,5 @@
+import LiquidBackdrop from "../components/LiquidBackdrop";
+import SplitText from "../components/SplitText";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import Marquee from "../components/Marquee";
@@ -100,13 +102,13 @@ export default function Home() {
       <section className="story container">
         <div>
           <span className="eyebrow">— THE PLACE</span>
-          <h2 className="headline story-title">
+          <SplitText as="h2" className="headline story-title">
             HANDPICKED
             <br />
             ROCKS AND
             <br />
             LOUD KIDS
-          </h2>
+          </SplitText>
           <p className="story-body">{story}</p>
           <span className="text-link">Our story →</span>
         </div>
@@ -122,7 +124,7 @@ export default function Home() {
             <img src={panel.image} alt={panel.alt} />
             <div className="split-panel-overlay" style={{ background: panel.overlay }} />
             <div className="split-panel-content">
-              <h3 className="headline headline--cream split-panel-title">{panel.title}</h3>
+              <SplitText as="h3" className="headline headline--cream split-panel-title">{panel.title}</SplitText>
               <p className="split-panel-body">{panel.body}</p>
               <Link className="btn btn-booknow btn-sm split-panel-cta" to={panel.to}>
                 {panel.cta}
@@ -139,7 +141,7 @@ export default function Home() {
         <div className="gallery-heading">
           <div>
             <span className="eyebrow">— A 34° AFTERNOON</span>
-            <h2 className="headline gallery-title">THE PLACE, UNFILTERED</h2>
+            <SplitText as="h2" className="headline gallery-title">THE PLACE, UNFILTERED</SplitText>
           </div>
           <Link to="/gallery" className="text-link">All photos →</Link>
         </div>
@@ -180,8 +182,9 @@ export default function Home() {
 
       <div className="closing-cta-wrap">
         <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-        <div className="closing-cta">
-          <h2 className="headline closing-cta-title">COME GET WET</h2>
+        <div className="closing-cta has-liquid">
+          <LiquidBackdrop palette="tangerine" />
+          <SplitText as="h2" className="headline closing-cta-title">COME GET WET</SplitText>
           <p className="closing-cta-sub">
             No forms, no fuss. Ring Conny on 072 264 4009 or book online.
           </p>

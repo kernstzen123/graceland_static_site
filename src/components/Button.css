@@ -118,3 +118,83 @@
     font-size: 20px;
   }
 }
+
+/* --- Makeover: shine sweep, rolling arrow, magnetic offset ------------------
+   Magnetic pull uses the independent `translate` property (set from
+   components/Pointer.jsx) so it composes with the press `transform`. */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.08s var(--ease), box-shadow 0.08s var(--ease),
+    background-color 0.15s var(--ease), color 0.15s var(--ease),
+    translate 0.6s cubic-bezier(0.2, 0.9, 0.25, 1.4);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  z-index: -1;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg) translateX(0);
+  pointer-events: none;
+}
+.btn:hover::before {
+  animation: btn-shine 0.85s var(--ease);
+}
+@keyframes btn-shine {
+  to {
+    transform: skewX(-20deg) translateX(420%);
+  }
+}
+
+/* Book Now breathes a little so it stays the loudest thing on screen */
+.btn-booknow.btn-lg,
+.btn-booknow.btn-hero,
+.btn-primary.btn-lg {
+  animation: btn-breathe 3.2s ease-in-out infinite;
+}
+@keyframes btn-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.08) saturate(1.1);
+  }
+}
+
+.btn-arrow {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1.1em;
+  line-height: 1.1;
+}
+.btn-arrow span {
+  display: block;
+  transition: transform 0.45s var(--ease);
+}
+.btn-arrow span:last-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-120%);
+}
+.btn:hover .btn-arrow span:first-child {
+  transform: translateX(120%);
+}
+.btn:hover .btn-arrow span:last-child {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn::before {
+    animation: none !important;
+  }
+}

@@ -81,3 +81,102 @@
     gap: 12px;
   }
 }
+
+/* --- Makeover layers ------------------------------------------------------ */
+.hero .shader-canvas {
+  z-index: 0;
+}
+.hero-overlay,
+.hero-grain {
+  pointer-events: none;
+}
+
+/* Warm sun-flare bloom drifting across the top of the hero */
+.hero-glow {
+  position: absolute;
+  inset: -20% -10% auto auto;
+  width: 70vw;
+  height: 70vw;
+  max-width: 1000px;
+  max-height: 1000px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 197, 68, 0.38) 0%, rgba(233, 96, 31, 0.12) 38%, transparent 68%);
+  mix-blend-mode: screen;
+  filter: blur(10px);
+  pointer-events: none;
+  animation: hero-glow-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow-drift {
+  0% {
+    transform: translate(10%, -6%) scale(0.9);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-18%, 8%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.hero-content {
+  z-index: 2;
+}
+
+.hero-title {
+  text-shadow: none;
+  filter: drop-shadow(0 7px 0 rgba(42, 18, 6, 0.32));
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 130px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--color-cream);
+  writing-mode: vertical-rl;
+}
+.hero-scroll-cue i {
+  position: relative;
+  width: 2px;
+  height: 64px;
+  background: rgba(251, 243, 226, 0.25);
+  overflow: hidden;
+}
+.hero-scroll-cue i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 40%;
+  background: var(--color-yellow);
+  animation: scroll-cue 1.8s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(260%);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-scroll-cue {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow,
+  .hero-scroll-cue i::after {
+    animation: none;
+  }
+}

@@ -1,3 +1,5 @@
+import LiquidBackdrop from "../components/LiquidBackdrop";
+import SplitText from "../components/SplitText";
 import Hero from "../components/Hero";
 import WaveDivider from "../components/WaveDivider";
 import AttractionRow from "../components/AttractionRow";
@@ -54,7 +56,7 @@ export default function WaterPark() {
 
       <div className="wp-attractions-heading container">
         <span className="eyebrow">— WHAT'S IN THERE</span>
-        <h2 className="headline wp-attractions-title">THE ATTRACTIONS</h2>
+        <SplitText as="h2" className="headline wp-attractions-title">THE ATTRACTIONS</SplitText>
       </div>
 
       <div style={{ marginTop: "48px" }}>
@@ -63,10 +65,11 @@ export default function WaterPark() {
         ))}
       </div>
 
-      <div className="wp-rates">
+      <div className="wp-rates has-liquid">
+        <LiquidBackdrop palette="pine" bubbles={false} />
         <div className="wp-rates-heading">
           <span className="eyebrow eyebrow--on-dark">— WHAT IT COSTS</span>
-          <h2 className="headline wp-rates-title">RATES</h2>
+          <SplitText as="h2" className="headline wp-rates-title">RATES</SplitText>
         </div>
         <div className="wp-rates-grid">
           <RateTable {...ratesWet} headTone="teal" />
@@ -78,7 +81,7 @@ export default function WaterPark() {
 
       <div className="wp-times-rules container">
         <div>
-          <h2 className="headline wp-times-title">OPENING TIMES</h2>
+          <SplitText as="h2" className="headline wp-times-title">OPENING TIMES</SplitText>
           <span className="wp-subhead">DAY VISITORS</span>
           <HoursList rows={dayVisitorHours} />
           <span className="wp-subhead" id="parties">
@@ -87,18 +90,19 @@ export default function WaterPark() {
           <HoursList rows={partyHours} closedNote={closedNote} />
         </div>
         <div className="wp-rules-card">
-          <h2 className="headline wp-times-title">THE RULES</h2>
+          <SplitText as="h2" className="headline wp-times-title">THE RULES</SplitText>
           <RulesList rules={rules} />
         </div>
       </div>
 
       <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="wp-closing">
-        <h2 className="headline wp-closing-title">
+      <div className="wp-closing has-liquid">
+        <LiquidBackdrop palette="tangerine" />
+        <SplitText as="h2" className="headline wp-closing-title">
           SEE YOU AT
           <br />
           THE SLIDES
-        </h2>
+        </SplitText>
         <div className="wp-closing-btn">
           <BookNowButton size="hero" />
         </div>

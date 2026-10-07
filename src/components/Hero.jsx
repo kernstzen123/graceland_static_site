@@ -1,11 +1,15 @@
 import Nav from "./Nav";
 import WaveDivider from "./WaveDivider";
+import ShaderCanvas from "./ShaderCanvas";
+import SplitText from "./SplitText";
 import "./Hero.css";
 
 /**
- * Full-bleed image hero shared by Home, Water Park and Weddings. Each page
- * tunes it via CSS custom properties (title size, height, content position)
- * rather than forking the markup.
+ * Full-bleed image hero shared by Home, Water Park, Parties and Weddings.
+ * The photo is rendered twice: a plain <img> (instant paint, alt text, and
+ * the fallback when WebGL is unavailable) and a liquid WebGL layer on top
+ * that ripples under the cursor and warps as the page scrolls.
+ * Each page tunes it via CSS custom properties rather than forking markup.
  */
 export default function Hero({
   image,
@@ -22,16 +26,14 @@ export default function Hero({
   waveFill = "#fbf3e2",
   vars = {},
 }) {
+  const filter = imageFilter ? { filter: imageFilter } : undefined;
   return (
     <div className="hero" style={vars}>
-      <img
-        className="hero-img"
-        src={image}
-        alt={imageAlt}
-        style={imageFilter ? { filter: imageFilter } : undefined}
-      />
+      <img className="hero-img" src={image} alt={imageAlt} style={filter} />
+      <ShaderCanvas variant="water" image={image} style={filter} />
       <div className="hero-overlay" style={{ background: gradient }} />
       {grain && <div className="hero-grain" />}
+      <div className="hero-glow" aria-hidden="true" />
       <Nav variant={navVariant} />
       <div className="hero-content">
         {eyebrow && (
@@ -44,14 +46,16 @@ export default function Hero({
             {eyebrow}
           </span>
         )}
-        <h1 className="hero-title">{title}</h1>
+        <SplitText as="h1" className="hero-title" split="hero">
+          {title}
+        </SplitText>
         {children}
       </div>
-      <WaveDivider
-        className="hero-wave"
-        amplitude={waveAmplitude}
-        fill={waveFill}
-      />
+      <div className="hero-scroll-cue" aria-hidden="true">
+        <span>SCROLL</span>
+        <i />
+      </div>
+      <WaveDivider className="hero-wave" amplitude={waveAmplitude} fill={waveFill} />
     </div>
   );
 }

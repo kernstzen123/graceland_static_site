@@ -10,7 +10,7 @@
 .stats-item {
   border-left: 2px solid var(--color-line-on-cream);
 }
-.stats-item:first-child {
+.liquid-backdrop + .stats-item {
   border-left: none;
 }
 

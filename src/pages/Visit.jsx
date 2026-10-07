@@ -1,3 +1,5 @@
+import LiquidBackdrop from "../components/LiquidBackdrop";
+import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import HoursList from "../components/HoursList";
 import BookNowButton from "../components/BookNowButton";
@@ -17,7 +19,7 @@ export default function Visit() {
 
       <div className="visit-title-block container">
         <span className="eyebrow">— LUSTIGAN ROAD, PAARL</span>
-        <h1 className="headline visit-title">FIND US</h1>
+        <SplitText as="h1" className="headline visit-title">FIND US</SplitText>
       </div>
 
       <div className="visit-grid">
@@ -100,8 +102,9 @@ export default function Visit() {
       </div>
 
       <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="visit-closing">
-        <h2 className="headline visit-closing-title">SEE YOU SATURDAY</h2>
+      <div className="visit-closing has-liquid">
+        <LiquidBackdrop palette="tangerine" />
+        <SplitText as="h2" className="headline visit-closing-title">SEE YOU SATURDAY</SplitText>
         <div className="visit-closing-btn">
           <BookNowButton size="hero" />
         </div>

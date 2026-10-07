@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
 import { contact } from "../data/content";
+import SplitText from "./SplitText";
+import { scrollTo } from "../lib/motion";
 import "./Footer.css";
+
+function FooterBottom() {
+  return (
+    <div className="footer-bottom">
+      <SplitText as="div" className="footer-wordmark" split="footer">
+        GRACELAND
+      </SplitText>
+      <div className="footer-legal">
+        <span>© {new Date().getFullYear()} Graceland Venues · Paarl</span>
+        <button type="button" className="footer-top" onClick={() => scrollTo(0)}>
+          Back to top ↑
+        </button>
+      </div>
+    </div>
+  );
+}
 
 /** variant "full" (Home — brand blurb + contact + site links) or
  *  "simple" (every other page — brand, contact, address). */
@@ -8,6 +26,7 @@ export default function Footer({ variant = "simple" }) {
   if (variant === "full") {
     return (
       <footer className="footer">
+        <div className="footer-grid">
         <div>
           <div className="footer-brand">GRACELAND</div>
           <p className="footer-blurb">
@@ -39,12 +58,15 @@ export default function Footer({ variant = "simple" }) {
           <br />
           <Link to="/terms">Terms &amp; Conditions</Link>
         </div>
+        </div>
+        <FooterBottom />
       </footer>
     );
   }
 
   return (
     <footer className="footer footer--simple">
+      <div className="footer-grid">
       <div className="footer-brand">GRACELAND</div>
       <div className="footer-col">
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
@@ -61,6 +83,8 @@ export default function Footer({ variant = "simple" }) {
         <br />
         <Link to="/terms">Terms &amp; Conditions</Link>
       </div>
+      </div>
+      <FooterBottom />
     </footer>
   );
 }

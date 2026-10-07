@@ -1,3 +1,4 @@
+import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import "./Legal.css";
@@ -9,7 +10,7 @@ export default function PrivacyPolicy() {
       
       <div className="legal-header container">
         <span className="eyebrow">— THE BORING BUT IMPORTANT STUFF</span>
-        <h1 className="headline legal-title">PRIVACY POLICY</h1>
+        <SplitText as="h1" className="headline legal-title">PRIVACY POLICY</SplitText>
       </div>
 
       <div className="legal-content container">

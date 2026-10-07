@@ -1,3 +1,5 @@
+import LiquidBackdrop from "../components/LiquidBackdrop";
+import SplitText from "../components/SplitText";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import WaveDivider from "../components/WaveDivider";
@@ -26,7 +28,7 @@ export default function Gallery() {
 
       <div className="gallery-title-block container">
         <span className="eyebrow">— THE PLACE, UNFILTERED</span>
-        <h1 className="headline gallery-page-title">ALL PHOTOS</h1>
+        <SplitText as="h1" className="headline gallery-page-title">ALL PHOTOS</SplitText>
       </div>
 
       <div className="gallery-page-grid container">
@@ -36,8 +38,9 @@ export default function Gallery() {
       </div>
 
       <WaveDivider amplitude="high" fill="#e9601f" bg="#fbf3e2" />
-      <div className="gallery-closing">
-        <h2 className="headline gallery-closing-title">SEE IT YOURSELF</h2>
+      <div className="gallery-closing has-liquid">
+        <LiquidBackdrop palette="tangerine" />
+        <SplitText as="h2" className="headline gallery-closing-title">SEE IT YOURSELF</SplitText>
         <div className="gallery-closing-btn">
           <BookNowButton size="hero" />
         </div>
